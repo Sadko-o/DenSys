@@ -1,6 +1,5 @@
-import { Fragment } from 'react'
-import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Disclosure } from '@headlessui/react'
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import logo from "../../assets/logo.svg"
 
 const navigation = [
@@ -52,7 +51,7 @@ export default function HomeHeader() {
                       <a
                         key={item.name}
                         href={item.href}
-                        className={classNames( 'text-[black] hover:bg-[blue] hover:text-white',
+                        className={classNames( 'text-[#1B1212] hover:bg-[#2273FF] hover:text-white',
                           'px-3 py-2 rounded-md text-sm font-medium'
                         )}
                         aria-current={item.current ? 'page' : undefined}

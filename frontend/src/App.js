@@ -1,10 +1,10 @@
 import React from 'react'
-import HomeHeader from './components/headers/HomeHeader'
 import "./App.css"
+import Home from "./components/pages/home/Home"
 const App = () => {
   return (
     <>
-      <HomeHeader/>
+    <Home/>
     </>
   )
 }
