@@ -23,6 +23,8 @@ module.exports = {
         'n2': '-5',
         'n3': '-4',
       },
+      transitionProperty:{
+      },
   },
   plugins: [],
 }
