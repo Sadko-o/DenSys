@@ -32,9 +32,9 @@ const Services = () => {
                     </div>
                     <div class="relative group lg:hidden">
                         <div class="relative  bg-white rounded-md text-center space-y-4 p-6 md:p-8 shadow-md transition duration-200 group-hover:scale-105 lg:group-hover:scale-110">
-                            <img src="images/avatars/metal.png" class="w-20 -mt-2 mx-auto" width="512" height="512" alt="package-delivery illustration"/>
+                            <img src={Cardiology} class="w-20 -mt-2 mx-auto bg-white" width="512" height="512" alt="package-delivery illustration"/>
                             <h4 class="text-2xl bg-white text-gray-800 font-medium transition group-hover:text-blue-600">Cardiology</h4>
-                            <p class="text-gray-600 bg-white">Neque Dolor, alias quae, quibusdam accusantium, laudantium recusandae tenetur fugiat non cum doloribus aperiam voluptates nostrum.</p>
+                            <p class="text-gray-600 bg-white">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Modi delectus est libero expedita in totam aspernatur, laboriosam eligendi repellendus a provident ut dolore recusandae molestiae, quos natus tenetur quas officiis!</p>
                         </div>
                     </div>
                     <div class="relative group">

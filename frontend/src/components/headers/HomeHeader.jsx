@@ -1,6 +1,7 @@
 import { Disclosure } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import logo from "../../assets/logo.svg"
+import {Link} from 'react-router-dom';
 
 const navigation = [
   { name: 'About Us', href: '#', current: true },
@@ -64,8 +65,7 @@ export default function HomeHeader() {
               <div className="inline-flex rounded-md shadow">
                 <a
                   href="#"
-                  className=' shadow-md  text-[black] hover:bg-[blue] hover:text-white px-3  py-2 rounded-md text-sm font-medium'>
-                  Sign In
+                  className=' shadow-md  text-[black] hover:bg-[blue] hover:text-white px-3  py-2 rounded-md text-sm font-medium'><Link to="/signin">Sign In</Link>
                 </a>
               </div>
               </div>
