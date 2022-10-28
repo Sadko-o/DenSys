@@ -1,6 +1,8 @@
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { useNavigate } from 'react-router-dom';
+
 import logo from "../../assets/logo.svg"
 
 const navigation = [
@@ -14,7 +16,17 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
+
 export default function HomeHeader() {
+
+  const navigate = useNavigate();
+
+  const navigateToSignInPage = () => {
+    navigate('/signIn')
+  }
+  const navigateToHome = () => {
+    navigate('/')
+  }
 
   return (
     <Disclosure as="nav" className="main">
@@ -31,10 +43,10 @@ export default function HomeHeader() {
                   ) : (
                     <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
                   )}
-                </Disclosure.Button> 
+                </Disclosure.Button>
               </div>
               <div className="flex flex-1 items-center justify-center  sm:items-stretch sm:justify-between">
-                <div className="flex flex-shrink-0 items-center">
+                <div className="flex flex-shrink-0 items-center" onClick={navigateToHome}>
                   <img
                     className="block h-8 w-auto lg:hidden"
                     src={logo}
@@ -52,7 +64,7 @@ export default function HomeHeader() {
                       <a
                         key={item.name}
                         href={item.href}
-                        className={classNames( 'text-[black] hover:bg-[blue] hover:text-white',
+                        className={classNames('text-[black] hover:bg-[blue] hover:text-white',
                           'px-3 py-2 rounded-md text-sm font-medium'
                         )}
                         aria-current={item.current ? 'page' : undefined}
@@ -64,18 +76,21 @@ export default function HomeHeader() {
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-              <div className="inline-flex rounded-md shadow">
-                <a
-                  href="#"
-                  className=' shadow-md  text-[black] hover:bg-[blue] hover:text-white px-3  py-2 rounded-md text-sm font-medium'>
-                  Sign In
-                </a>
-              </div>
+                <div className="inline-flex rounded-md shadow">
+                  <a
+                    href="#"
+                    className=' shadow-md  text-[black] hover:bg-[blue] hover:text-white px-3  py-2 rounded-md text-sm font-medium'
+                    onClick={navigateToSignInPage}>
+                    Sign In
+                  </a>
+                </div>
               </div>
             </div>
+
+
           </div>
 
-          
+
 
           <Disclosure.Panel className="sm:hidden">
             <div className="space-y-1 px-2 pt-2 pb-3">
