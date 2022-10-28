@@ -4,11 +4,12 @@ import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { useNavigate } from 'react-router-dom';
 
 import logo from "../../assets/logo.svg"
+import {Link} from 'react-router-dom';
 
 const navigation = [
   { name: 'About Us', href: '#', current: true },
   { name: 'Specialists', href: '#', current: false },
-  { name: 'Services', href: '#', current: false },
+  { name: 'Services', href: '#services', current: false },
   { name: 'Contact Us', href: '#', current: false },
 ]
 
@@ -22,17 +23,17 @@ export default function HomeHeader() {
   const navigate = useNavigate();
 
   const navigateToSignInPage = () => {
-    navigate('/signIn')
+    navigate('/signin')
   }
   const navigateToHome = () => {
     navigate('/')
   }
 
   return (
-    <Disclosure as="nav" className="main">
+    <Disclosure as="nav" className="main" class="fixed -z-n1 flex justify-between " style={{"width":"100vw"}}>
       {({ open }) => (
         <>
-          <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+          <div className="w-full sm:px-6 lg:px-8 "  >
             <div className="relative flex h-16 items-center justify-between">
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 {/* Mobile menu button*/}
@@ -50,12 +51,10 @@ export default function HomeHeader() {
                   <img
                     className="block h-8 w-auto lg:hidden"
                     src={logo}
-                    alt="Your Company"
                   />
                   <img
                     className="hidden h-8 w-auto lg:block"
                     src={logo}
-                    alt="Your Company"
                   />
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
@@ -64,7 +63,7 @@ export default function HomeHeader() {
                       <a
                         key={item.name}
                         href={item.href}
-                        className={classNames('text-[black] hover:bg-[blue] hover:text-white',
+                        className={classNames( 'text-[#1B1212] hover:bg-[#2273FF] hover:text-white',
                           'px-3 py-2 rounded-md text-sm font-medium'
                         )}
                         aria-current={item.current ? 'page' : undefined}
