@@ -4,7 +4,7 @@ const SignIn = () => {
 
     const navigate = useNavigate();
     const navigateToAdmingPage = () => {
-        navigate('/admingpage')        
+        navigate('/adminpage')        
     }
   return (
     <div id="signin">
