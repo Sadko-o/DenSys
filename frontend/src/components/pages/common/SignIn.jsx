@@ -1,6 +1,11 @@
 import React from 'react'
-
+import { useNavigate } from 'react-router-dom'
 const SignIn = () => {
+
+    const navigate = useNavigate();
+    const navigateToAdmingPage = () => {
+        navigate('/admingpage')        
+    }
   return (
     <div id="signin">
         <div class=" sm:py-8 lg:py-12">
@@ -19,7 +24,9 @@ const SignIn = () => {
                 <input name="password" class="w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2" />
                 </div>
 
-                <button class="block bg-gray-800 hover:bg-gray-700 active:bg-gray-600 focus-visible:ring ring-gray-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3">Sign in</button>
+                <button 
+                    onClick={navigateToAdmingPage}
+                    class="block bg-gray-800 hover:bg-gray-700 active:bg-gray-600 focus-visible:ring ring-gray-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3">Sign in</button>
 
                 <div class="flex justify-center items-center relative">
                 <span class="h-px bg-gray-300 absolute inset-x-0"></span>

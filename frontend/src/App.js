@@ -5,13 +5,15 @@ import {
   Routes,
 } from "react-router-dom";
 import "./App.css"
-import SignIn from './components/pages/admin/SignIn'
+import SignIn from './components/pages/common/SignIn';
 import Home from "./components/pages/home/Home"
+import AdminPage from './components/pages/admin/AdminPage';
 const App = () => {
   return (
     <Routes>
       <Route exact path="/" element={<Home/>}/>
       <Route path="/signin" element={<SignIn/>}/>
+      <Route path="/admingpage" element={<AdminPage/>}/>
     </Routes>
   )
 }
