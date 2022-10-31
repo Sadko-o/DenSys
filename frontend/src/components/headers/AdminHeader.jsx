@@ -18,7 +18,7 @@ function classNames(...classes) {
 }
 
 export default function HomeHeader() {
-  const auth = false;
+  const auth = true;
   const navigate = useNavigate();
 
   const navigateToSignInPage = () => {
@@ -59,31 +59,17 @@ export default function HomeHeader() {
                   <img className="hidden h-8 w-auto lg:block" src={logo} />
                 </div>
               </div>
-              {auth ? (
-                <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                  <div className="inline-flex rounded-md shadow">
-                    <a
-                      href="#"
-                      className=" shadow-md  text-[black] hover:bg-[blue] hover:text-white px-3  py-2 rounded-md text-sm font-medium"
-                      onClick={navigateToSignInPage}
-                    >
-                      Sign In
-                    </a>
-                  </div>
+              <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                <div className="inline-flex rounded-md shadow">
+                  <a
+                    href="#"
+                    className=" shadow-md  text-[black] hover:bg-[blue] hover:text-white px-3  py-2 rounded-md text-sm font-medium"
+                    onClick={navigateToHome}
+                  >
+                    Log Out
+                  </a>
                 </div>
-              ) : (
-                <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                  <div className="inline-flex rounded-md shadow">
-                    <a
-                      href="#"
-                      className=" shadow-md  text-[black] hover:bg-[blue] hover:text-white px-3  py-2 rounded-md text-sm font-medium"
-                      onClick={navigateToHome}
-                    >
-                      Log Out
-                    </a>
-                  </div>
-                </div>
-              )}
+              </div>
             </div>
           </div>
 
