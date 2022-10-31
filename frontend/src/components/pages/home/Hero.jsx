@@ -1,6 +1,11 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const Hero = () => {
+    const navigate = useNavigate();
+    const navigateToSignInPage = () => {
+        navigate('/signin')
+    }
   return (
     <>
         <section class="text-gray-600 body-font">
@@ -11,7 +16,7 @@ const Hero = () => {
             </h1>
             <p class="mb-8 leading-relaxed">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reiciendis deleniti placeat voluptatibus aperiam harum deserunt quis distinctio reprehenderit quibusdam ad vitae cumque omnis tempora explicabo dignissimos inventore, assumenda soluta cupiditate.</p>
             <div class="flex justify-center ">
-                <button class="inline-block px-4 py-2 text-[#1B1212] font-semibold border-2 border-[#2273FF] rounded-md hover:bg-[#2273FF] hover:text-white focus:outline-none">Sign In</button>
+                <button onClick = {navigateToSignInPage} class="inline-block px-4 py-2 text-[#1B1212] font-semibold border-2 border-[#2273FF] rounded-md hover:bg-[#2273FF] hover:text-white focus:outline-none">Sign In</button>
             </div>
             </div>
             <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
