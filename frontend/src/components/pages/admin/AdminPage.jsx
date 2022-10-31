@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import HomeHeader from "../../headers/HomeHeader";
+import AdminHeader from "../../headers/AdminHeader";
 
 const roles = ['Patients', 'Doctors', 'Admins']
 class AdminPage extends Component {
@@ -7,9 +7,16 @@ class AdminPage extends Component {
     
     return (
       <>
+<<<<<<< HEAD
         <div className=" w-full sm:px-6 lg:px-8">
           <div className="max-w-screen-2xl px-4 md:px-8 mx-auto">
             <h2 className="my-5 text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-4 md:mb-8">
+=======
+        <AdminHeader></AdminHeader>
+        <div class=" sm:py-10 lg:py-16">
+          <div class="max-w-screen-2xl px-4 md:px-8 mx-auto">
+            <h2 class="text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-4 md:mb-8">
+>>>>>>> 6789628533d0c1b8226093ddc808ca8d650c5894
               Users List
             </h2>
             
