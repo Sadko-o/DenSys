@@ -18,7 +18,7 @@ function classNames(...classes) {
 }
 
 export default function HomeHeader() {
-  const auth = false;
+  const auth = true;
   const navigate = useNavigate();
 
   const navigateToSignInPage = () => {
@@ -58,27 +58,23 @@ export default function HomeHeader() {
                   <img className="block h-8 w-auto lg:hidden" src={logo} />
                   <img className="hidden h-8 w-auto lg:block" src={logo} />
                 </div>
-                {auth ? (
-                  <div className="hidden sm:ml-6 sm:block"></div>
-                ) : (
-                  <div className="hidden sm:ml-6 sm:block">
-                    <div className="flex space-x-4">
-                      {navigation.map((item) => (
-                        <a
-                          key={item.name}
-                          href={item.href}
-                          className={classNames(
-                            "text-[#1B1212] hover:bg-[#2273FF] hover:text-white",
-                            "px-3 py-2 rounded-md text-sm font-medium"
-                          )}
-                          aria-current={item.current ? "page" : undefined}
-                        >
-                          {item.name}
-                        </a>
-                      ))}
-                    </div>
+                <div className="hidden sm:ml-6 sm:block">
+                  <div className="flex space-x-4">
+                    {navigation.map((item) => (
+                      <a
+                        key={item.name}
+                        href={item.href}
+                        className={classNames(
+                          "text-[#1B1212] hover:bg-[#2273FF] hover:text-white",
+                          "px-3 py-2 rounded-md text-sm font-medium"
+                        )}
+                        aria-current={item.current ? "page" : undefined}
+                      >
+                        {item.name}
+                      </a>
+                    ))}
                   </div>
-                )}
+                </div>
               </div>
               {auth ? (
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">

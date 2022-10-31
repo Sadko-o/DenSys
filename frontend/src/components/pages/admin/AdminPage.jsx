@@ -18,7 +18,6 @@ export default function AdminPage()
             <h2 class="text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-4 md:mb-8">
               Users List
             </h2>
-            
 
             <div className="panel w-1/2 mx-auto flex flex-1 items-center justify-center  sm:items-stretch sm:justify-between">
 
@@ -44,9 +43,6 @@ export default function AdminPage()
 
                 </div>
             </div>
-
-          
-
           </div>
         </div>
       </>
