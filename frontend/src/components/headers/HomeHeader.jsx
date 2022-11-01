@@ -18,7 +18,7 @@ function classNames(...classes) {
 }
 
 export default function HomeHeader() {
-  const auth = true;
+  const auth = false;
   const navigate = useNavigate();
 
   const navigateToSignInPage = () => {
@@ -82,9 +82,9 @@ export default function HomeHeader() {
                     <a
                       href="#"
                       className=" shadow-md  text-[black] hover:bg-[blue] hover:text-white px-3  py-2 rounded-md text-sm font-medium"
-                      onClick={navigateToSignInPage}
+                      onClick={navigateToHome}
                     >
-                      Sign In
+                      Log Out
                     </a>
                   </div>
                 </div>
@@ -94,9 +94,9 @@ export default function HomeHeader() {
                     <a
                       href="#"
                       className=" shadow-md  text-[black] hover:bg-[blue] hover:text-white px-3  py-2 rounded-md text-sm font-medium"
-                      onClick={navigateToHome}
+                      onClick={navigateToSignInPage}
                     >
-                      Log Out
+                      Sign In
                     </a>
                   </div>
                 </div>
