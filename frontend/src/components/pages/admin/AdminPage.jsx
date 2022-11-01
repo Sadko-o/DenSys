@@ -6,8 +6,6 @@ import { FaBeer, FaPen, FaPencilAlt, FaSearch, FaTrash } from 'react-icons/fa';
 import tmpImg from '../../../assets/rami.jpg'
 const roles = ['Patients', 'Doctors', 'Admins']
 
-const roles = ["Patients", "Doctors", "Admins"];
-
 export default function AdminPage() {
   const [currentRole, setCurrentRole] = useState(0);
 
