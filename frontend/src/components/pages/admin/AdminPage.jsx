@@ -3,6 +3,7 @@ import AdminHeader from "../../headers/AdminHeader";
 import { useState } from 'react'
 import { FaBeer, FaPen, FaPencilAlt, FaSearch, FaTrash } from 'react-icons/fa';
 
+import tmpImg from '../../../assets/rami.jpg'
 const roles = ['Patients', 'Doctors', 'Admins']
 
 
@@ -19,7 +20,7 @@ export default function AdminPage() {
             Users List
           </h2>
 
-          <div className="searchPanel w-1/2 mx-auto flex flex-1 items-center justify-center  sm:items-stretch sm:justify-between">
+          <div className="searchPanel w-8/12 mx-auto flex flex-1 items-center justify-center  sm:items-stretch sm:justify-between">
             <div className="flex space-x-6 first:text-indigo-500">
               {roles.map((item, index) => (
                 index === currentRole ?
@@ -51,12 +52,17 @@ export default function AdminPage() {
           </div>
 
           <div id="userList my-3">
-            <div className="w-1/2 mx-auto shadow-md bg-slate-600">
+            <div className="w-8/12 mx-auto shadow-md bg-slate-600">
               <div className="p-4 flex flex-1 items-center justify-center  sm:items-stretch sm:justify-between">
-                <div className="image">
-                  image
+                <div className="profileInfo flex flex-1">
+                  <div className="image">
+                    <img className="object-cover w-24 h-24 p-2 rounded-full" src={tmpImg} alt="" />
+                  </div>
+                  <div className="info mx-6 my-4">
+                    <p>Rami Malek</p>
+                    <p>rami.malek@gmail.com</p>
+                  </div>
                 </div>
-                
                 <div className="justify-between">
                   <button>
                     <FaTrash/>
