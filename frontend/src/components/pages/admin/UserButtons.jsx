@@ -14,7 +14,7 @@ class UserButtons extends Component {
         }
         return (
             <div>
-                <button className={buttonClass}>
+                <button onClick={this.props.handleDelete} className={buttonClass}>
                     <div className='text-center bg-transparent group-hover/edit:text-white'>
                         {this.props.name}
                     </div>

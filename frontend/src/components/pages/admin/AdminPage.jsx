@@ -1,14 +1,32 @@
-import React, { Component } from "react";
+import React from "react";
 import AdminHeader from "../../headers/AdminHeader";
 import { useState } from 'react'
-import { FaBeer, FaPen, FaPencilAlt, FaSearch, FaTrash } from 'react-icons/fa';
+import { useNavigate } from "react-router-dom";
 
-import tmpImg from '../../../assets/rami.jpg'
 import User from './User'
-const roles = ['Patients', 'Doctors', 'Admins']
+import tmpImg from '../../../assets/rami.jpg'
+import UserDB from './UserDB.json'
+const roles = ['All users', 'Patients', 'Doctors']
+
 
 export default function AdminPage() {
   const [currentRole, setCurrentRole] = useState(0);
+  const navigate = useNavigate();
+
+
+  var UserList = UserDB;
+  switch (currentRole) {
+    case 1: 
+      UserList = UserList.filter((user) => user.role == "patient")
+      break; 
+    case 2:
+      UserList = UserList.filter((user) => user.role == "doctor")
+      break;
+  }
+
+  const navigateToRegisterPage = () => {
+    navigate("/registeruser");
+  };
 
   return (
     <>
@@ -19,8 +37,8 @@ export default function AdminPage() {
             Users List
           </h2>
 
-          <div className="searchPanel w-8/12 mx-auto flex flex-1 items-center justify-center sm:items-stretch sm:justify-between">
-            <div className="flex space-x-6 border-b first:text-indigo-500 ">
+          <div className="searchPanel w-1/2 mx-auto flex flex-1 items-center justify-center sm:items-stretch sm:justify-between">
+            <div className="flex space-x-6 border-b  first:text-indigo-500 ">
               {roles.map((item, index) =>
                 index === currentRole ? (
                   <button
@@ -55,15 +73,16 @@ export default function AdminPage() {
               <button class="mx-1 px-4 py-1 text-sm text-indigo-500 font-semibold rounded-full border border-purple-200 hover:text-white hover:bg-indigo-500 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                 Search
               </button>
+              <button
+              onClick={navigateToRegisterPage} 
+              class="mx-1 px-4 py-1 text-sm text-indigo-500 font-semibold rounded-full border border-purple-200 hover:text-white hover:bg-green-500 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                +
+              </button>
             </div>
           </div>
           
-          <div id="userList" className="my-2">
-            <User name="Rami Malek" email="rami.malek@gmail.com" img = {tmpImg}/>
-            <User name="Rami Malek" email="rami.malek@gmail.com" img = {tmpImg}/>
-            <User name="Rami Malek" email="rami.malek@gmail.com" img = {tmpImg}/>
-            <User name="Rami Malek" email="rami.malek@gmail.com" img = {tmpImg}/>
-            <User name="Rami Malek" email="rami.malek@gmail.com" img = {tmpImg}/>
+          <div id="userList" className="my-2" >
+            {UserList.map( (user) => <User user={user} img={tmpImg}/>)}
           </div>
                     
         </div>

@@ -21,9 +21,6 @@ export default function HomeHeader() {
   const auth = true;
   const navigate = useNavigate();
 
-  const navigateToRegisterPage = () => {
-    navigate("/registeruser");
-  };
   const navigateToHome = () => {
     navigate("/");
   };
@@ -60,15 +57,6 @@ export default function HomeHeader() {
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <div className="inline-flex mx-2 rounded-md shadow">
-                  <a
-                    href="#"
-                    className=" shadow-md  text-[black] hover:bg-[#6565ff] hover:text-white px-3  py-2 rounded-md text-sm font-medium"
-                    onClick={navigateToRegisterPage}
-                  >
-                    Create User
-                  </a>
-                </div>
                 <div className="inline-flex rounded-md shadow">
                   <a
                     href="#"
