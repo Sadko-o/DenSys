@@ -112,14 +112,130 @@ export default function Doctor() {
             ></input>
           </div>
           <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="ID">
-              Department ID
+            <label
+              class="block text-gray-700 text-sm font-bold mb-2"
+              for="speDetailsID"
+            >
+              Specialization Details ID
             </label>
             <input
               class="bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-              id="departmentID"
+              id="speDetailsID"
               type="text"
-              placeholder="Department ID"
+              placeholder="Specialization Details ID"
+            ></input>
+          </div>
+          <div class="mb-4">
+            <label
+              class="block text-gray-700 text-sm font-bold mb-2"
+              for="experience"
+            >
+              Experience (in years)
+            </label>
+            <input
+              class="bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+              id="experience"
+              type="text"
+              placeholder="Experience"
+            ></input>
+          </div>
+          <div class="mb-4">
+            <label
+              class="block text-gray-700 text-sm font-bold mb-2"
+              for="category"
+            >
+              Category
+            </label>
+            <input
+              class="bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+              id="category"
+              type="text"
+              placeholder="Category"
+            ></input>
+          </div>
+          <div class="mb-4">
+            <label
+              class="block text-gray-700 text-sm font-bold mb-2"
+              for="priceAppoint"
+            >
+              Price of the appointment
+            </label>
+            <input
+              class="bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+              id="priceAppoint"
+              type="text"
+              placeholder="Price of the appointment"
+            ></input>
+          </div>
+          <div class="mb-4">
+            <label
+              class="block text-gray-700 text-sm font-bold mb-2"
+              for="degree"
+            >
+              Degree/Education
+            </label>
+            <input
+              class="bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+              id="degree"
+              type="text"
+              placeholder="Degree/Education"
+            ></input>
+          </div>
+          <div class="flex justify-center">
+            <div class="mb-3 w-96">
+              <label
+                class="block text-gray-700 text-sm font-bold mb-2"
+                for="degree"
+              >
+                Photo of the doctor
+              </label>
+              <input
+                class="form-control
+    block
+    w-full
+    px-3
+    py-1.5
+    text-base
+    font-normal
+    text-gray-700
+    bg-white bg-clip-padding
+    border border-solid border-gray-300
+    rounded
+    transition
+    ease-in-out
+    m-0
+    focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                type="file"
+                id="formFile"
+              ></input>
+            </div>
+          </div>
+          <div class="mb-4">
+            <label
+              class="block text-gray-700 text-sm font-bold mb-2"
+              for="homepage"
+            >
+              Homepage URL (optional)
+            </label>
+            <input
+              class="bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+              id="homepage"
+              type="text"
+              placeholder="Homepage URL"
+            ></input>
+          </div>
+          <div class="mb-4">
+            <label
+              class="block text-gray-700 text-sm font-bold mb-2"
+              for="rating"
+            >
+              Rating
+            </label>
+            <input
+              class="bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+              id="rating"
+              type="number"
+              placeholder="Rating"
             ></input>
           </div>
           <div class="flex items-center justify-center">
