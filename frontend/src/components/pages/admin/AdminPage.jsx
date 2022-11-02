@@ -19,8 +19,8 @@ export default function AdminPage() {
             Users List
           </h2>
 
-          <div className="searchPanel w-8/12 mx-auto flex flex-1 items-center justify-center  sm:items-stretch sm:justify-between">
-            <div className="flex space-x-6 first:text-indigo-500">
+          <div className="searchPanel w-8/12 mx-auto flex flex-1 items-center justify-center sm:items-stretch sm:justify-between">
+            <div className="flex space-x-6 border-b first:text-indigo-500 ">
               {roles.map((item, index) =>
                 index === currentRole ? (
                   <button
@@ -43,7 +43,7 @@ export default function AdminPage() {
               )}
             </div>
 
-            <div className="searchPanel flex">
+            <div className="searchPanel flex my-1">
               <label class="relative block ">
                 <input
                   class="placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-full py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"
@@ -57,8 +57,15 @@ export default function AdminPage() {
               </button>
             </div>
           </div>
-
-          <User name="Rami Malek" email="rami.malek@gmail.com" img = {tmpImg}/>
+          
+          <div id="userList" className="my-2">
+            <User name="Rami Malek" email="rami.malek@gmail.com" img = {tmpImg}/>
+            <User name="Rami Malek" email="rami.malek@gmail.com" img = {tmpImg}/>
+            <User name="Rami Malek" email="rami.malek@gmail.com" img = {tmpImg}/>
+            <User name="Rami Malek" email="rami.malek@gmail.com" img = {tmpImg}/>
+            <User name="Rami Malek" email="rami.malek@gmail.com" img = {tmpImg}/>
+          </div>
+                    
         </div>
       </div>
     </>
