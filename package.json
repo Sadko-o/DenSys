@@ -6,6 +6,7 @@
   },
   "dependencies": {
     "@fortawesome/free-regular-svg-icons": "^6.2.0",
+    "flowbite": "^1.5.3",
     "react-router-dom": "^6.4.2"
   }
 }
