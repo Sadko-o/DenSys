@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { FaBeer, FaPen, FaPencilAlt, FaSearch, FaTrash } from 'react-icons/fa';
 
 import tmpImg from '../../../assets/rami.jpg'
+import User from './User'
 const roles = ['Patients', 'Doctors', 'Admins']
 
 export default function AdminPage() {
@@ -52,34 +53,12 @@ export default function AdminPage() {
                 />
               </label>
               <button class="mx-1 px-4 py-1 text-sm text-indigo-500 font-semibold rounded-full border border-purple-200 hover:text-white hover:bg-indigo-500 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                Saerch
+                Search
               </button>
             </div>
           </div>
 
-          <div id="userList my-3">
-            <div className="w-8/12 mx-auto shadow-md bg-slate-600">
-              <div className="p-4 flex flex-1 items-center justify-center  sm:items-stretch sm:justify-between">
-                <div className="profileInfo flex flex-1">
-                  <div className="image">
-                    <img className="object-cover w-24 h-24 p-2 rounded-full" src={tmpImg} alt="" />
-                  </div>
-                  <div className="info mx-6 my-4">
-                    <p>Rami Malek</p>
-                    <p>rami.malek@gmail.com</p>
-                  </div>
-                </div>
-                <div className="justify-between">
-                  <button>
-                    <FaTrash />
-                  </button>
-                  <button>
-                    <FaPen />
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
+          <User name="Rami Malek" email="rami.malek@gmail.com" img = {tmpImg}/>
         </div>
       </div>
     </>
