@@ -88,7 +88,7 @@ export default function Patient() {
             <input
               class=" bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
               id="dateOfBirth"
-              type="text"
+              type="number"
               placeholder="xxxxxxxxxxxx"
             ></input>
           </div>
@@ -102,7 +102,7 @@ export default function Patient() {
             <input
               class="bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
               id="userID"
-              type="text"
+              type="number"
               placeholder="xxxxxxxxx"
             ></input>
           </div>
@@ -116,8 +116,9 @@ export default function Patient() {
             <input
               class="bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
               id="contactNumber"
-              type="text"
+              type="tel"
               placeholder="+7-(XXX)-XXX-XX-XX"
+              pattern="+7-[0-9]{3}-[0-9]{3}-[0-9]{2}-[0-9]{2}"
             ></input>
           </div>
           <div class="mb-4">
@@ -130,8 +131,9 @@ export default function Patient() {
             <input
               class="bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
               id="emergencyContactNumber"
-              type="text"
+              type="tel"
               placeholder="+7-(XXX)-XXX-XX-XX"
+              pattern="+7-[0-9]{3}-[0-9]{3}-[0-9]{2}-[0-9]{2}"
             ></input>
           </div>
           <div class="mb-4">
@@ -144,7 +146,7 @@ export default function Patient() {
             <input
               class="bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
               id="email"
-              type="text"
+              type="email"
               placeholder="example@gmail.com"
             ></input>
           </div>

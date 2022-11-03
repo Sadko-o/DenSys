@@ -51,7 +51,7 @@ export default function Doctor() {
             <input
               class=" bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
               id="dateOfBirth"
-              type="text"
+              type="number"
               placeholder="xxxxxxxxxxxx"
             ></input>
           </div>
@@ -65,7 +65,7 @@ export default function Doctor() {
             <input
               class="bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
               id="userID"
-              type="text"
+              type="number"
               placeholder="xxxxxxxxx"
             ></input>
           </div>
@@ -79,8 +79,9 @@ export default function Doctor() {
             <input
               class="bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
               id="contactNumber"
-              type="text"
+              type="tel"
               placeholder="+7-(XXX)-XXX-XX-XX"
+              pattern="+7-[0-9]{3}-[0-9]{3}-[0-9]{2}-[0-9]{2}"
             ></input>
           </div>
           <div class="mb-4">
@@ -107,7 +108,7 @@ export default function Doctor() {
             <input
               class="bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
               id="departmentID"
-              type="text"
+              type="number"
               placeholder="Department ID"
             ></input>
           </div>
@@ -121,7 +122,7 @@ export default function Doctor() {
             <input
               class="bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
               id="speDetailsID"
-              type="text"
+              type="number"
               placeholder="Specialization Details ID"
             ></input>
           </div>
@@ -135,7 +136,7 @@ export default function Doctor() {
             <input
               class="bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
               id="experience"
-              type="text"
+              type="number"
               placeholder="Experience"
             ></input>
           </div>
@@ -185,7 +186,7 @@ export default function Doctor() {
             <div class="mb-3 w-96">
               <label
                 class="block text-gray-700 text-sm font-bold mb-2"
-                for="degree"
+                for="photo"
               >
                 Photo of the doctor
               </label>
@@ -206,7 +207,7 @@ export default function Doctor() {
     m-0
     focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                 type="file"
-                id="formFile"
+                id="photo"
               ></input>
             </div>
           </div>
@@ -220,7 +221,7 @@ export default function Doctor() {
             <input
               class="bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
               id="homepage"
-              type="text"
+              type="url"
               placeholder="Homepage URL"
             ></input>
           </div>
@@ -236,6 +237,8 @@ export default function Doctor() {
               id="rating"
               type="number"
               placeholder="Rating"
+              min="0"
+              max="10"
             ></input>
           </div>
           <div class="flex items-center justify-center">
