@@ -51,8 +51,9 @@ export default function Doctor() {
             <input
               class=" bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
               id="dateOfBirth"
-              type="number"
+              type="tel"
               placeholder="xxxxxxxxxxxx"
+              pattern="[0-9]{12}"
             ></input>
           </div>
           <div class="mb-4">
@@ -65,8 +66,9 @@ export default function Doctor() {
             <input
               class="bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
               id="userID"
-              type="number"
+              type="tel"
               placeholder="xxxxxxxxx"
+              pattern="[0-9]{9}"
             ></input>
           </div>
           <div class="mb-4">
@@ -110,6 +112,7 @@ export default function Doctor() {
               id="departmentID"
               type="number"
               placeholder="Department ID"
+              min="0"
             ></input>
           </div>
           <div class="mb-4">
@@ -124,6 +127,7 @@ export default function Doctor() {
               id="speDetailsID"
               type="number"
               placeholder="Specialization Details ID"
+              min="0"
             ></input>
           </div>
           <div class="mb-4">
@@ -138,6 +142,7 @@ export default function Doctor() {
               id="experience"
               type="number"
               placeholder="Experience"
+              min="0"
             ></input>
           </div>
           <div class="mb-4">
