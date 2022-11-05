@@ -7,13 +7,10 @@ const Patient=mongoose.model("Patient")
 const bcrypt=require('bcryptjs')
 const jwt=require('jsonwebtoken')
 const JWT_SECRET =process.env.JWT_SECRET
+const {auth} = require("../middleware/login")
+const userController = require("../controllers/userController")
 
-
-
-router.get('/signup',(req,res)=>{
-      res.send("Vovan sexy");
-})
-
+// router.post('/loginDoctor', userController.loginDoctor)
 router.post('/loginDoctor', (req, res) => {
     var {email, password} = req.body
     if (!email || !password) {
@@ -74,13 +71,12 @@ router.post('/loginPatient', (req, res) => {
     })
 })
 
-router.post('/loginAdmin', (req, res) => {
+router.post('/loginAdmin', async (req, res) => {
     var {email, password} = req.body
     if (!email || !password) {
         return res.status(422).json({error:"Plase add email or password"})
     }
-    const admin = new Admin()
-    admin.findOne({email:email})
+    const admin = await Admin.findOne({email:email})
     .then(savedUser=>{
         if(!savedUser){
             return res.status(422).json({error:"Invalid email or password"})
@@ -213,10 +209,10 @@ router.post('/signupPatient',(req,res)=>{
     })
 })
 
-const login=require('../middleware/login') 
+// const login = app.use
 
-router.get('/protected',login,(req,res)=>{
-    res.send("hello user")
-})
+// router.get('/protected',auth,(req,res)=>{
+//     res.send("hello user")
+// })
 
 module.exports=router
