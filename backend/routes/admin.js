@@ -9,9 +9,12 @@ router.post('/signupPatient', adminController.signupPatient)
 
 router.put('/updatePatient', adminController.updatePatient)
 router.put('/updateDoctor', adminController.updateDoctor)
+router.put('/updateAdmin', adminController.updateAdmin)
 
 router.get('/getAllPatients', dashboard.getAllPatients)
 router.get('/getAllDoctors', dashboard.getAllDoctors)
 
 router.delete('/deletePatient', adminController.deletePatient)
+router.delete('/deleteAdmin', adminController.deleteAdmin)
+router.delete('/deleteDoctor', adminController.deleteDoctor)
 module.exports=router
