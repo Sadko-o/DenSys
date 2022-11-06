@@ -19,6 +19,7 @@ const doctorSchema = new mongoose.Schema({
     address: {type: String, required :true },
     degree: {type: String, required :true },
     rating: {type: Number, required :true },
+    email: {type: String, required :true },
     homepage: {type: String, required :false },
     password: {type: String, required :true },
     appointments:[{type: mongoose.Schema.Types.ObjectId, ref: 'Appointment'}]
