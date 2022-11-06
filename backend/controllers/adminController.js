@@ -138,33 +138,36 @@ exports.signupAdmin = (req, res) => {
 
 // updatePatient
 exports.updatePatient = (req, res) => {
-    const _id = req.query._id
-    console.log(req.query)
-    const patient = new Patient({
-        _id: _id,
-        dateOfBirth: req.body.dateOfBirth,
-        iin: req.body.iin ,
-        id: req.body.id ,
-        name: req.body.name ,
-        surname: req.body.surname ,
-        middlename: req.body.middlename,
-        blood: req.body.blood ,
-        emergencyContact: req.body.emergencyContact ,
-        contact: req.body.contact ,
-        email: req.body.email ,
-        address: req.body.address ,
-        martialStatus: req.body.martialStatus ,
-        registrationDate: req.body.registrationDate,
-        password: req.body.password,
-        // appointments: req.body.appointments
-    });
-    console.log(patient)
+    var {email} = req.body
+    Patient.findOne({email:email})
+    .then(savedUser=>{
+        const _id = savedUser._id
+        console.log(savedUser)
+        const patient = new Patient({
+            _id: _id,
+            dateOfBirth: req.body.dateOfBirth,
+            iin: req.body.iin ,
+            id: req.body.id ,
+            name: req.body.name ,
+            surname: req.body.surname ,
+            middlename: req.body.middlename,
+            blood: req.body.blood ,
+            emergencyContact: req.body.emergencyContact ,
+            contact: req.body.contact ,
+            email: req.body.email ,
+            address: req.body.address ,
+            martialStatus: req.body.martialStatus ,
+            registrationDate: req.body.registrationDate,
+            password: req.body.password,
+            // appointments: req.body.appointments
+        });
     if (!_id){ 
         res.status(400).json({message: '_id not included!'});
     }
-    Patient.updateOne(req.query.id, patient)  
+    Patient.updateOne(savedUser, patient)  
     .then(() => {
-        // console.log(_id)
+        console.log("From Email: ", _id)
+        console.log("From Query: ", req.query._id)
         res.status(201).json({
           message: 'Patient updated successfully!'
         });
@@ -176,7 +179,9 @@ exports.updatePatient = (req, res) => {
         });
       }
     )
+    })   
 }
+
 // updateDoctor
 exports.updateDoctor = (req, res) => {
     const _id = req.query._id
