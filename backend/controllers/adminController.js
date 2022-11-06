@@ -139,8 +139,9 @@ exports.signupAdmin = (req, res) => {
 // updatePatient
 exports.updatePatient = (req, res) => {
     const _id = req.query._id
+    console.log(req.query)
     const patient = new Patient({
-        _id: req.query._id,
+        _id: _id,
         dateOfBirth: req.body.dateOfBirth,
         iin: req.body.iin ,
         id: req.body.id ,
@@ -251,11 +252,58 @@ exports.updateAdmin = (req, res) => {
     )
 }
 
-
 // deletePatient
-// deleteDoctor
-// deleteAdmin
+exports.deletePatient = (req, res) => {
+    console.log(req.query._id)
+    Patient.deleteOne(req.query.id)
+    .then(() => {
+            res.status(200).json({
+                message: 'Deleted!'
+            });
+        })
+    .catch(
+        (error) => {
+            res.status(400).json({
+                error: error
+            });
+        }
+    );
+}
 
+// deleteDoctor
+exports.deleteDoctor = (req, res) => {
+    console.log(req.query._id)
+    Doctor.deleteOne(req.query.id)
+    .then(() => {
+            res.status(200).json({
+                message: 'Deleted!'
+            });
+        })
+    .catch(
+        (error) => {
+            res.status(400).json({
+                error: error
+            });
+        }
+    );
+}
+// deleteAdmin
+exports.deleteAdmin = (req, res) => {
+    console.log(req.query._id)
+    Admin.deleteOne(req.query.id)
+    .then(() => {
+            res.status(200).json({
+                message: 'Deleted!'
+            });
+        })
+    .catch(
+        (error) => {
+            res.status(400).json({
+                error: error
+            });
+        }
+    );
+}
 
 // "iin": "req.body.iin",
 // "id": "req.body.id",

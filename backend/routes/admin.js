@@ -13,4 +13,5 @@ router.put('/updateDoctor', adminController.updateDoctor)
 router.get('/getAllPatients', dashboard.getAllPatients)
 router.get('/getAllDoctors', dashboard.getAllDoctors)
 
+router.delete('/deletePatient', adminController.deletePatient)
 module.exports=router
