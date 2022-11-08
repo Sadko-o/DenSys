@@ -21,9 +21,6 @@ export default function HomeHeader() {
   const auth = true;
   const navigate = useNavigate();
 
-  const navigateToSignInPage = () => {
-    navigate("/signin");
-  };
   const navigateToHome = () => {
     navigate("/");
   };
@@ -63,12 +60,13 @@ export default function HomeHeader() {
                 <div className="inline-flex rounded-md shadow">
                   <a
                     href="#"
-                    className=" shadow-md  text-[black] hover:bg-[blue] hover:text-white px-3  py-2 rounded-md text-sm font-medium"
+                    className=" shadow-md  text-[black] hover:bg-[#6565ff] hover:text-white px-3  py-2 rounded-md text-sm font-medium"
                     onClick={navigateToHome}
                   >
                     Log Out
                   </a>
                 </div>
+                
               </div>
             </div>
           </div>

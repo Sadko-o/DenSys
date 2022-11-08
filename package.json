@@ -6,7 +6,11 @@
   },
   "dependencies": {
     "@fortawesome/free-regular-svg-icons": "^6.2.0",
+<<<<<<< HEAD
     "react-icons": "^4.6.0",
+=======
+    "flowbite": "^1.5.3",
+>>>>>>> 269464dddb961cf744217cb320ee708d04513569
     "react-router-dom": "^6.4.2"
   }
 }
