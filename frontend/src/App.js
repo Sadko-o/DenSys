@@ -1,4 +1,4 @@
-import { Switch } from "@headlessui/react";
+// import { Switch } from "@headlessui/react";
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
@@ -10,7 +10,7 @@ const App = () => {
   return (
     <Routes>
       <Route exact path="/" element={<Home/>} />
-      <Route path="/signin" element={<SignIn />} />
+      <Route path="/loginDoctor" element={<SignIn />} />
       <Route path="/adminpage" element={<AdminPage />} />
       <Route path="/registeruser" element={<RegisterUserPage />} />
     </Routes>
