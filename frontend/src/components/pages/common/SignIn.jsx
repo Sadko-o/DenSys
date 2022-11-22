@@ -2,31 +2,31 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import HomeHeader from "../../headers/HomeHeader";
 import logo from "../../../assets/logo.svg";
+import { useForm } from "react-hook-form";
+import validator from "validator";
+import { useState } from "react";
 
 const SignIn = () => {
   const navigate = useNavigate();
+
   const navigateToAdmingPage = () => {
     navigate("/adminpage");
   };
+
   const navigateToHome = () => {
     navigate("/");
   };
-  // const hiddenPassowrd = () => {
-  //   const passwordToggle = document.querySelector(".js-password-toggle");
-  //   passwordToggle.addEventListener("change", function () {
-  //     const password = document.querySelector(".js-password"),
-  //       passwordLabel = document.querySelector(".js-password-label");
 
-  //     if (password.type === "password") {
-  //       password.type = "text";
-  //       passwordLabel.innerHTML = "hide";
-  //     } else {
-  //       password.type = "password";
-  //       passwordLabel.innerHTML = "show";
-  //     }
-  //     password.focus();
-  //   });
-  // };
+  const [message, setMessage] = useState("");
+  const validateEmail = (e) => {
+    var email = e.target.value;
+
+    if (!validator.isEmail(email)) {
+      setMessage("Please, enter valid Email!");
+    } else {
+      setMessage("");
+    }
+  };
   return (
     <div id="signin">
       <div className="w-full sm:px-6 lg:px-8 ">
@@ -58,7 +58,9 @@ const SignIn = () => {
                 <input
                   name="email"
                   class="w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2"
+                  onChange={(e) => validateEmail(e)}
                 />
+                <span class="text-red-500 text-sm">{message}</span>
               </div>
 
               <div>
@@ -73,7 +75,7 @@ const SignIn = () => {
                   class="w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2"
                 /> */}
                 <input
-                  class="appearance-none border-2 rounded w-full py-3 px-3 leading-tight border-gray-300 bg-gray-50 focus:outline-none focus:ring ring-indigo-300 focus:bg-white text-gray-700 font-mono"
+                  class="appearance-none border rounded w-full py-2 px-3 leading-tigh bg-gray-50 focus:outline-none focus:ring ring-indigo-300 focus:bg-white text-gray-800 font-mono"
                   id="password"
                   type="password"
                   autocomplete="off"

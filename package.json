@@ -6,8 +6,11 @@
   },
   "dependencies": {
     "@fortawesome/free-regular-svg-icons": "^6.2.0",
-    "react-icons": "^4.6.0",
     "flowbite": "^1.5.3",
-    "react-router-dom": "^6.4.2"
+    "formik": "^2.2.9",
+    "react-hook-form": "^7.39.5",
+    "react-icons": "^4.6.0",
+    "react-router-dom": "^6.4.2",
+    "validator": "^13.7.0"
   }
 }
