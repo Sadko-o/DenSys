@@ -11,6 +11,22 @@ const SignIn = () => {
   const navigateToHome = () => {
     navigate("/");
   };
+  // const hiddenPassowrd = () => {
+  //   const passwordToggle = document.querySelector(".js-password-toggle");
+  //   passwordToggle.addEventListener("change", function () {
+  //     const password = document.querySelector(".js-password"),
+  //       passwordLabel = document.querySelector(".js-password-label");
+
+  //     if (password.type === "password") {
+  //       password.type = "text";
+  //       passwordLabel.innerHTML = "hide";
+  //     } else {
+  //       password.type = "password";
+  //       passwordLabel.innerHTML = "show";
+  //     }
+  //     password.focus();
+  //   });
+  // };
   return (
     <div id="signin">
       <div className="w-full sm:px-6 lg:px-8 ">
@@ -52,9 +68,15 @@ const SignIn = () => {
                 >
                   Password
                 </label>
-                <input
+                {/* <input
                   name="password"
                   class="w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2"
+                /> */}
+                <input
+                  class="appearance-none border-2 rounded w-full py-3 px-3 leading-tight border-gray-300 bg-gray-50 focus:outline-none focus:ring ring-indigo-300 focus:bg-white text-gray-700 font-mono"
+                  id="password"
+                  type="password"
+                  autocomplete="off"
                 />
               </div>
 
