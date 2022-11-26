@@ -22,7 +22,7 @@ const SignIn = () => {
 
   function verifiyUser() {
     //TODO for backend: Check if email and password is valid
-    let verified = false;
+    let verified = true;
     if (userRole === "admin") {
       axios.post(adminSign, {
         email: email,
