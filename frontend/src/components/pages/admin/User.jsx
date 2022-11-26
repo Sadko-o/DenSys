@@ -51,6 +51,7 @@ export default class User extends Component {
     {
         this.setState({visibility: !this.state.visibility})
     }
+    
     const onDeleteHandle = (userInfo) => 
     {
         let confirm = window.confirm(`Are you sure you want to delete ${userInfo.role} ${userInfo.name} ${userInfo.surname} with ID: ${userInfo.ID}?`);
