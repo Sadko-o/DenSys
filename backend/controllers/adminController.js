@@ -142,7 +142,6 @@ exports.updatePatient = (req, res) => {
     Patient.findOne({email:email})
     .then(savedUser=>{
         const _id = savedUser._id
-        console.log(savedUser)
         const patient = new Patient({
             _id: _id,
             dateOfBirth: req.body.dateOfBirth,
@@ -161,13 +160,8 @@ exports.updatePatient = (req, res) => {
             martialStatus: req.body.martialStatus ,
             // appointments: req.body.appointments
         });
-    if (!_id){ 
-        res.status(400).json({message: '_id not included!'});
-    }
     Patient.updateOne(savedUser, patient)  
     .then(() => {
-        console.log("From Email: ", _id)
-        console.log("From Query: ", req.query._id)
         res.status(201).json({
           message: 'Patient updated successfully!'
         });
@@ -184,130 +178,138 @@ exports.updatePatient = (req, res) => {
 
 // updateDoctor
 exports.updateDoctor = (req, res) => {
-    const _id = req.query._id
-    const doctor = new Doctor({
-        _id: req.query._id,
-        dateOfBirth: req.body.dateOfBirth,
-        iin: req.body.iin ,
-        id: req.body.id ,
-        name: req.body.name ,
-        surname: req.body.surname ,
-        middlename: req.body.middlename,
-        contact: req.body.contact ,
-        departmentId: req.body.departmentId ,
-        specId: req.body.specId ,
-        experience: req.body.experience ,
-        photo: req.body.photo ,
-        price: req.body.price ,
-        schedule: req.body.schedule ,
-        degree: req.body.degree ,
-        category: req.body.category ,
-        email: req.body.email ,
-        address: req.body.address ,
-        rating: req.body.rating ,
-        homepage: req.body.homepage,
-        password: req.body.password,
+    var {email} = req.body
+    Doctor.findOne({email:email})
+    .then(savedUser=>{
+        const _id = savedUser._id
+        const doctor = new Doctor({
+            _id: _id,
+            dateOfBirth: req.body.dateOfBirth,
+            iin: req.body.iin ,
+            id: req.body.id ,
+            name: req.body.name ,
+            surname: req.body.surname ,
+            middlename: req.body.middlename,
+            contact: req.body.contact ,
+            departmentId: req.body.departmentId ,
+            specId: req.body.specId ,
+            experience: req.body.experience ,
+            photo: req.body.photo ,
+            price: req.body.price ,
+            schedule: req.body.schedule ,
+            degree: req.body.degree ,
+            category: req.body.category ,
+            email: req.body.email ,
+            address: req.body.address ,
+            rating: req.body.rating ,
+            homepage: req.body.homepage,
+            password: req.body.password,
         // appointments: req.body.appointments
-    });
-    console.log(doctor)
-    if (!_id){
-        res.status(400).json({message: '_id not included!'});
-    }
-    Doctor.updateOne(req.query.id, doctor)
+        });
+    Doctor.updateOne(savedUser, doctor)  
     .then(() => {
-        // console.log(_id)
         res.status(201).json({
-            message: 'Doctor updated successfully!'
-            });
-        }
+          message: 'Doctor updated successfully!'
+        });
+      }
     ).catch(
-        (error) => {
-            res.status(400).json({
-            error: error
-            });
-        }
+      (error) => {
+        res.status(400).json({
+          error: error
+        });
+      }
     )
+    })   
 }
 // updateAdmin
 exports.updateAdmin = (req, res) => {
-    const _id = req.query._id
-    const admin = new Admin({
-        _id: req.query._id,
-        name: req.body.name ,
-        email: req.body.email ,
-        password: req.body.password
-    });
-    console.log(admin)
-    if (!_id){
-        res.status(400).json({message: '_id not included!'});
-    }
-    Admin.updateOne(req.query.id, admin)
+    var {email} = req.body
+    Admin.findOne({email:email})
+    .then(savedUser=>{
+        console.log(savedUser)
+        const _id = savedUser._id
+        const admin = new Admin({
+            _id: _id,
+            email: req.body.email ,
+            password: req.body.password
+        });
+    Admin.updateOne(savedUser, admin)  
     .then(() => {
-        // console.log(_id)
         res.status(201).json({
-            message: 'Admin updated successfully!'
-            });
-        }
+          message: 'Admin updated successfully!'
+        });
+      }
     ).catch(
-        (error) => {
-            res.status(400).json({
-            error: error
-            });
-        }
+      (error) => {
+        console.log("lol")
+        res.status(400).json({
+          error: error
+        });
+      }
     )
+    })   
 }
 
 // deletePatient
 exports.deletePatient = (req, res) => {
-    console.log(req.query._id)
-    Patient.deleteOne(req.query.id)
-    .then(() => {
-            res.status(200).json({
-                message: 'Deleted!'
-            });
-        })
-    .catch(
-        (error) => {
-            res.status(400).json({
-                error: error
-            });
-        }
-    );
+    var {email} = req.body
+    Patient.findOne({email:email})
+    .then(savedUser=>{
+        Patient.deleteOne(savedUser)
+        .then(() => {
+                res.status(200).json({
+                    message: 'Patient deleted!'
+                });
+            })
+        .catch(
+            (error) => {
+                res.status(400).json({
+                    error: error
+                });
+            }
+        );
+    })
 }
 
 // deleteDoctor
 exports.deleteDoctor = (req, res) => {
-    console.log(req.query._id)
-    Doctor.deleteOne(req.query.id)
-    .then(() => {
-            res.status(200).json({
-                message: 'Deleted!'
-            });
-        })
-    .catch(
-        (error) => {
-            res.status(400).json({
-                error: error
-            });
-        }
-    );
+    var {email} = req.body
+    Doctor.findOne({email:email})
+    .then(savedUser=>{
+        Doctor.deleteOne(savedUser)
+        .then(() => {
+                res.status(200).json({
+                    message: 'Doctor deleted!'
+                });
+            })
+        .catch(
+            (error) => {
+                res.status(400).json({
+                    error: error
+                });
+            }
+        );
+    })
 }
 // deleteAdmin
 exports.deleteAdmin = (req, res) => {
-    console.log(req.query._id)
-    Admin.deleteOne(req.query.id)
-    .then(() => {
-            res.status(200).json({
-                message: 'Deleted!'
-            });
-        })
-    .catch(
-        (error) => {
-            res.status(400).json({
-                error: error
-            });
-        }
-    );
+    var {email} = req.body
+    Admin.findOne({email:email})
+    .then(savedUser=>{
+        Admin.deleteOne(savedUser)
+        .then(() => {
+                res.status(200).json({
+                    message: 'Admin deleted!'
+                });
+            })
+        .catch(
+            (error) => {
+                res.status(400).json({
+                    error: error
+                });
+            }
+        );
+    })
 }
 
 // "iin": "req.body.iin",
