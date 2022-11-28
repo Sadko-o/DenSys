@@ -154,11 +154,11 @@ exports.updatePatient = (req, res) => {
             blood: req.body.blood ,
             emergencyContact: req.body.emergencyContact ,
             contact: req.body.contact ,
-            email: req.body.email ,
             address: req.body.address ,
-            martialStatus: req.body.martialStatus ,
+            email: req.body.email ,
             registrationDate: req.body.registrationDate,
             password: req.body.password,
+            martialStatus: req.body.martialStatus ,
             // appointments: req.body.appointments
         });
     if (!_id){ 
