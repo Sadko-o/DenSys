@@ -1,5 +1,6 @@
 const Patient = require('../models/patientModel');
 const Doctor = require('../models/doctorModel');
+const bcrypt=require('bcryptjs');
 const Appointment = require('../models/appointmentModel');
 
 exports.getAllAppointments = (req, res) => {
@@ -22,7 +23,7 @@ exports.updateAppointment = (req, res) => {
             time: savedUser.time,
             doctorId: savedUser.doctorId,
             patientId: savedUser.patientId,
-            approved: approved
+            approveStatus: approveStatus
         });
     Appointment.updateOne(savedUser, appointment)
     .then(() => {
@@ -60,3 +61,30 @@ exports.deleteAppointment = (req, res) => {
     })
 }
 
+exports.createAppointment = (req, res) => {
+    var {id, day, time, doctorId, patientId, approveStatus} = req.body
+    console.log(req.body)
+    // res.json({message:"saved successfully"})
+    
+    Appointment.findOne({doctorId:doctorId, day:day, time:time})
+    .then(savedUser=>{
+        if(savedUser){
+            return res.status(422).json({error:"Appointment already exists"})
+        }
+        const appointment = new Appointment({
+            id,
+            day,
+            time,
+            doctorId,
+            patientId,
+            approveStatus
+        });
+        appointment.save()
+        .then(user=>{
+            res.json({message:"Appointment created successfully"})
+        })
+        .catch(err=>{
+            console.log(err)
+        })
+    }) 
+}
