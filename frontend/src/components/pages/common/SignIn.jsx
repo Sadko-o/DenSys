@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import logo from "../../../assets/logo.svg";
 import { useForm } from "react-hook-form";
 import validator from "validator";
-import { useState } from "react";
 import { useRef } from "react";
 
 const SignIn = () => {
