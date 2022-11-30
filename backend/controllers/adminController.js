@@ -276,6 +276,7 @@ exports.deleteDoctor = (req, res) => {
     var {email} = req.body
     Doctor.findOne({email:email})
     .then(savedUser=>{
+        console.log(savedUser)
         Doctor.deleteOne(savedUser)
         .then(() => {
                 res.status(200).json({
