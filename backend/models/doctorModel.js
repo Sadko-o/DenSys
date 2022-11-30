@@ -22,7 +22,7 @@ const doctorSchema = new mongoose.Schema({
     email: {type: String, required :true },
     homepage: {type: String, required :false },
     password: {type: String, required :true },
-    appointments:[{type: mongoose.Schema.Types.ObjectId, ref: 'Appointment'}]
+    appointments:[{type: Array, ref: 'Appointment'}]
 });
 
 module.exports = mongoose.model("Doctor", doctorSchema);

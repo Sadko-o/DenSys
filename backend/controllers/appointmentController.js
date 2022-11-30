@@ -1,7 +1,7 @@
 const Patient = require('../models/patientModel');
 const Doctor = require('../models/doctorModel');
-const bcrypt=require('bcryptjs');
 const Appointment = require('../models/appointmentModel');
+
 
 exports.getAllAppointments = (req, res) => {
     Appointment.find()
@@ -14,25 +14,47 @@ exports.getAllAppointments = (req, res) => {
 }
 
 exports.updateAppointment = (req, res) => {
-    var {id} = req.body
-    Appointment.findOne({id:id})
+    var {id, day, time, doctorEmail, patientEmail, approveStatus} = req.body
+    console.log(req.body)
+
+    // res.json({message:"saved successfully"})
+    
+    Appointment.findOne({doctorEmail:doctorEmail, day:day, time:time})
     .then(savedUser=>{
+        const _id = savedUser._id
         const appointment = new Appointment({
-            _id: id,
-            day: savedUser.day,
-            time: savedUser.time,
-            doctorId: savedUser.doctorId,
-            patientId: savedUser.patientId,
-            approveStatus: approveStatus
+            _id: _id,
+            id: req.body.id,
+            day: req.body.day,
+            time: req.body.time,
+            doctorEmail: req.body.doctorEmail,
+            patientEmail: req.body.patientEmail,
+            approveStatus: req.body.approveStatus
         });
     Appointment.updateOne(savedUser, appointment)
     .then(() => {
+        if (req.body.approveStatus == "Rejected") {
+            Doctor.findOne({email:doctorEmail})
+            .then(savedUser=>{
+                const newUser = new Doctor(savedUser)
+                newUser.appointments[day][time] = 0
+                console.log(newUser)
+                Doctor.updateOne(savedUser, newUser)
+                .then(() => {
+                    console.log('Doctor updated successfully!')
+                }).catch(
+                (error) => {
+                   console.error(error)
+                })
+            })
+        }
         res.status(201).json({
           message: 'Appointment updated successfully!'
         });
       }
     ).catch(
       (error) => {
+        console.log("lolkek")
         res.status(400).json({
           error: error
         });
@@ -42,11 +64,24 @@ exports.updateAppointment = (req, res) => {
 }
 
 exports.deleteAppointment = (req, res) => {
-    var {id} = req.body
-    Appointment.findOne({id:id})    
+    var {day, time, doctorEmail} = req.body
+    Appointment.findOne({doctorEmail:doctorEmail, day:day, time:time})    
     .then(savedUser=>{
         Appointment.deleteOne(savedUser)
         .then(() => {
+            Doctor.findOne({email:doctorEmail})
+            .then(savedUser=>{
+                const newUser = new Doctor(savedUser)
+                newUser.appointments[day][time] = 0
+                console.log(newUser)
+                Doctor.updateOne(savedUser, newUser)
+                .then(() => {
+                    console.log('Doctor updated successfully!')
+                }).catch(
+                (error) => {
+                   console.error(error)
+                })
+            })
                 res.status(200).json({
                     message: 'Appointment deleted!'
                 });
@@ -62,11 +97,11 @@ exports.deleteAppointment = (req, res) => {
 }
 
 exports.createAppointment = (req, res) => {
-    var {id, day, time, doctorId, patientId, approveStatus} = req.body
+    var {id, day, time, doctorEmail, patientEmail, approveStatus} = req.body
     console.log(req.body)
     // res.json({message:"saved successfully"})
-    
-    Appointment.findOne({doctorId:doctorId, day:day, time:time})
+
+    Appointment.findOne({doctorEmail:doctorEmail, day:day, time:time})
     .then(savedUser=>{
         if(savedUser){
             return res.status(422).json({error:"Appointment already exists"})
@@ -75,12 +110,25 @@ exports.createAppointment = (req, res) => {
             id,
             day,
             time,
-            doctorId,
-            patientId,
+            doctorEmail,
+            patientEmail,
             approveStatus
         });
         appointment.save()
         .then(user=>{
+            Doctor.findOne({email:doctorEmail})
+            .then(savedUser=>{
+                const newUser = new Doctor(savedUser)
+                newUser.appointments[day][time] = 1
+                console.log(newUser)
+                Doctor.updateOne(savedUser, newUser)
+                .then(() => {
+                    console.log('Doctor updated successfully!')
+                }).catch(
+                (error) => {
+                   console.error(error)
+                })
+            })
             res.json({message:"Appointment created successfully"})
         })
         .catch(err=>{
