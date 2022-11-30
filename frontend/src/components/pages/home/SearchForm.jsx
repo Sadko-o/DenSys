@@ -1,6 +1,21 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const SearchForm = () => {
+    const history = useNavigate()
+    // const [search, setSearch] = React.useState('')
+    // const [searchType, setSearchType] = React.useState('')
+    // const [searchTypeOptions] = React.useState([
+    //     { value: 'all', label: 'All' }
+    // ])
+
+    const handleSearch = (e) => {
+        e.preventDefault()
+        // history.push(`/search/${searchType}/${search}`)
+        history.push(`/search`)
+    }   
+
+
   return (
     
         <form>
@@ -26,10 +41,11 @@ const SearchForm = () => {
                     </ul>
                 </div>
                 <div className="relative w-5/6 items-center">
-                    <input type="search" id="search-dropdown" className="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 " placeholder="Search" required/>
-                    <button type="submit" className="absolute top-0 right-0 p-2.5 text-sm font-medium text-white bg-white rounded-r-lg border   focus:ring-4 focus:outline-none focus:ring-blue-300 ">
+                    <input type="search" id="search-dropdown" className="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 " placeholder="Search"/>
+                    <button type="submit" className="absolute top-0 right-0 p-2.5 text-sm font-medium text-white bg-white rounded-r-lg border   focus:ring-4 focus:outline-none focus:ring-blue-300 " onClick={()=>handleSearch()}>
                         <svg aria-hidden="true" className="w-5 h-5  bg-transparent" fill="none" stroke="#2273FF" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                         <span className="sr-only">Search</span>
+
                     </button>
                 </div>
             </div>
