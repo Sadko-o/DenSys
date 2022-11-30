@@ -22,6 +22,7 @@ const doctorSchema = new mongoose.Schema({
     email: {type: String, required :true },
     homepage: {type: String, required :false },
     password: {type: String, required :true },
+    procedure: {type: String, required :true },
     appointments:[{type: Array, ref: 'Appointment'}]
 });
 
