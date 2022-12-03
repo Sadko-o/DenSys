@@ -4,8 +4,7 @@ import { weekDays, indexToTimeSlot } from "../../../timeDictionaries";
 export default function AppointmentLine(props) {
   const appointment = props.appointment;
   const handleApprove = props.handleApprove;
-  const handleReject = props.handleReject;
-
+  const filter = props.appointmentStatus;
   return (
     <>
       <tr className="border-b border-gray-200">
@@ -39,16 +38,20 @@ export default function AppointmentLine(props) {
           </div>
         </td>
         <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-          <button
-            onClick={() => handleApprove(appointment._id, "Confirmed")}
-            className="bg-green-500 hover:bg-green-700 text-white font-bold w-5 h-5 mx-1 rounded-full"
-          ></button>
-          <button
-            onClick={() => {
-              handleApprove(appointment._id, "Rejected");
-            }}
-            className="bg-red-500 hover:bg-red-700 text-white font-bold w-5 h-5 mx-1 rounded-full"
-          ></button>
+          {filter != 1 && (
+            <button
+              onClick={() => handleApprove(appointment._id, "Confirmed")}
+              className="bg-green-500 hover:bg-green-700 text-white font-bold w-5 h-5 mx-1 rounded-full"
+            ></button>
+          )}
+          {filter != 2 && (
+            <button
+              onClick={() => {
+                handleApprove(appointment._id, "Rejected");
+              }}
+              className="bg-red-500 hover:bg-red-700 text-white font-bold w-5 h-5 mx-1 rounded-full"
+            ></button>
+          )}
         </td>
       </tr>
     </>

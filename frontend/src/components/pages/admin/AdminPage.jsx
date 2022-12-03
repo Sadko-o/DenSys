@@ -51,7 +51,6 @@ const AdminPage = () => {
     setCurrentAppointmentStatus(index);
     setPage(0);
     getAllAppointments();
-    console.log(appointmentsSize);
   };
   const handleApprove = async (appointmentId, status) => {
     const currentAppointment = appointments.find(
@@ -148,6 +147,7 @@ const AdminPage = () => {
                           <AppointmentLine
                             appointment={appointment}
                             handleApprove={handleApprove}
+                            appointmentStatus={currentAppointmentStatus}
                           />
                         ))
                       ) : (
