@@ -16,8 +16,7 @@ router.put('/appointment', appointmentController.updateAppointment)
 
 router.get('/getAllPatients', dashboard.getAllPatients)
 router.get('/getAllDoctors', dashboard.getAllDoctors)
-router.get('/appointments', appointmentController.getAllAppointments)
-
+router.get('/appointment', appointmentController.getAllAppointments)
 
 router.delete('/patient', adminController.deletePatient)
 router.delete('/admin', adminController.deleteAdmin)
