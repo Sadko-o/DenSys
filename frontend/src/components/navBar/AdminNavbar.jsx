@@ -11,6 +11,10 @@ export default function AdminNavbar() {
   const logOutHandler = () => {
     navigate("/");
   };
+
+  const navigateToRegisterPage = () => {
+    navigate("/registeruser");
+  };
   return (
     <aside
       // For some reason, shadow doesn't work when there is a flex in a parent class
@@ -75,7 +79,12 @@ export default function AdminNavbar() {
                   clip-rule="evenodd"
                 ></path>
               </svg>
-              <span className="flex-1 ml-3 whitespace-nowrap">Profile</span>
+              <span
+                className="flex-1 ml-3 whitespace-nowrap"
+                onClick={navigateToRegisterPage}
+              >
+                Create User
+              </span>
             </a>
           </li>
           <li>
