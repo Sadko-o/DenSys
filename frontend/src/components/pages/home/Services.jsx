@@ -24,8 +24,8 @@ const Services = () => {
             </h2>
           </div>
           <div class="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 md:-mx-8">
-            <div class="relative group cursor-pointer">
-              <div class="relative  bg-white rounded-md text-center space-y-4 p-6 md:p-8 shadow-md transition duration-200 group-hover:scale-105 lg:group-hover:scale-110">
+            <div class="group cursor-pointer">
+              <div class="bg-white rounded-md text-center space-y-4 p-6 md:p-8 shadow-md transition duration-200 group-hover:scale-105 lg:group-hover:scale-110">
                 <img
                   src={Cardiology}
                   class="w-16 m-auto bg-white"
@@ -38,8 +38,8 @@ const Services = () => {
                 </h4>
               </div>
             </div>
-            <div class="relative group cursor-pointer">
-              <div class="relative  bg-white rounded-md text-center space-y-4 p-6 md:p-8 shadow-md transition duration-200 group-hover:scale-105 lg:group-hover:scale-110">
+            <div class="group cursor-pointer">
+              <div class="bg-white rounded-md text-center space-y-4 p-6 md:p-8 shadow-md transition duration-200 group-hover:scale-105 lg:group-hover:scale-110">
                 <img
                   src={Medicine}
                   class="w-16 m-auto bg-white"
@@ -52,8 +52,8 @@ const Services = () => {
                 </h4>
               </div>
             </div>
-            <div class="relative group cursor-pointer ">
-              <div class="relative  bg-white rounded-md text-center space-y-4 p-6 md:p-8 shadow-md transition duration-200 group-hover:scale-105 lg:group-hover:scale-110">
+            <div class="group cursor-pointer ">
+              <div class="bg-white rounded-md text-center space-y-4 p-6 md:p-8 shadow-md transition duration-200 group-hover:scale-105 lg:group-hover:scale-110">
                 <img
                   src={Surgery}
                   class="w-16 m-auto bg-white"
@@ -66,8 +66,8 @@ const Services = () => {
                 </h4>
               </div>
             </div>
-            <div class="relative group cursor-pointer lg:hidden">
-              <div class="relative  bg-white rounded-md text-center space-y-4 p-6 md:p-8 shadow-md transition duration-200 group-hover:scale-105 lg:group-hover:scale-110">
+            <div class="group cursor-pointer lg:hidden">
+              <div class=" bg-white rounded-md text-center space-y-4 p-6 md:p-8 shadow-md transition duration-200 group-hover:scale-105 lg:group-hover:scale-110">
                 <img
                   src={Gynecology}
                   class="w-20 -mt-2 mx-auto bg-white"
@@ -78,16 +78,10 @@ const Services = () => {
                 <h4 class="text-2xl bg-white text-gray-800 font-medium transition group-hover:text-blue-600">
                   Gynecology
                 </h4>
-                <p class="text-gray-600 bg-white">
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Modi
-                  delectus est libero expedita in totam aspernatur, laboriosam
-                  eligendi repellendus a provident ut dolore recusandae
-                  molestiae, quos natus tenetur quas officiis!
-                </p>
               </div>
             </div>
-            <div class="relative group cursor-pointer">
-              <div class="relative  bg-white rounded-md text-center space-y-4 p-6 md:p-8 shadow-md transition duration-200 group-hover:scale-105 lg:group-hover:scale-110">
+            <div class="group cursor-pointer">
+              <div class="bg-white rounded-md text-center space-y-4 p-6 md:p-8 shadow-md transition duration-200 group-hover:scale-105 lg:group-hover:scale-110">
                 <img
                   src={Pediatrics}
                   class="w-16 m-auto bg-white"
@@ -100,8 +94,8 @@ const Services = () => {
                 </h4>
               </div>
             </div>
-            <div class="relative group cursor-pointer">
-              <div class="relative  bg-white rounded-md text-center space-y-4 p-6 md:p-8 shadow-md transition duration-200 group-hover:scale-105 lg:group-hover:scale-110">
+            <div class="group cursor-pointer">
+              <div class=" bg-white rounded-md text-center space-y-4 p-6 md:p-8 shadow-md transition duration-200 group-hover:scale-105 lg:group-hover:scale-110">
                 <img
                   src={Radiology}
                   class="w-16 m-auto bg-white"
@@ -114,8 +108,8 @@ const Services = () => {
                 </h4>
               </div>
             </div>
-            <div class="relative group cursor-pointer">
-              <div class="relative  bg-white rounded-md text-center space-y-4 p-6 md:p-8 shadow-md transition duration-200 group-hover:scale-105 lg:group-hover:scale-110">
+            <div class="group cursor-pointer">
+              <div class=" bg-white rounded-md text-center space-y-4 p-6 md:p-8 shadow-md transition duration-200 group-hover:scale-105 lg:group-hover:scale-110">
                 <img
                   src={Dental}
                   class="w-16 m-auto bg-white"
@@ -129,8 +123,8 @@ const Services = () => {
               </div>
             </div>
 
-            <div class="relative group cursor-pointer">
-              <div class="relative  bg-white rounded-md text-center space-y-4 p-6 md:p-8 shadow-md transition duration-200 group-hover:scale-105 lg:group-hover:scale-110">
+            <div class="group cursor-pointer">
+              <div class=" bg-white rounded-md text-center space-y-4 p-6 md:p-8 shadow-md transition duration-200 group-hover:scale-105 lg:group-hover:scale-110">
                 <img
                   src={Eye}
                   class="w-16 m-auto bg-white"
@@ -143,8 +137,8 @@ const Services = () => {
                 </h4>
               </div>
             </div>
-            <div class="relative group cursor-pointer">
-              <div class="relative  bg-white rounded-md text-center space-y-4 p-6 md:p-8 shadow-md transition duration-200 group-hover:scale-105 lg:group-hover:scale-110">
+            <div class="group cursor-pointer">
+              <div class=" bg-white rounded-md text-center space-y-4 p-6 md:p-8 shadow-md transition duration-200 group-hover:scale-105 lg:group-hover:scale-110">
                 <img
                   src={ENT}
                   class="w-16 m-auto bg-white"
@@ -157,8 +151,8 @@ const Services = () => {
                 </h4>
               </div>
             </div>
-            <div class="relative group cursor-pointer">
-              <div class="relative  bg-white rounded-md text-center space-y-4 p-6 md:p-8 shadow-md transition duration-200 group-hover:scale-105 lg:group-hover:scale-110">
+            <div class="group cursor-pointer">
+              <div class=" bg-white rounded-md text-center space-y-4 p-6 md:p-8 shadow-md transition duration-200 group-hover:scale-105 lg:group-hover:scale-110">
                 <img
                   src={Orthopedics}
                   class="w-16 m-auto bg-white"
@@ -171,8 +165,8 @@ const Services = () => {
                 </h4>
               </div>
             </div>
-            <div class="relative group cursor-pointer">
-              <div class="relative  bg-white rounded-md text-center space-y-4 p-6 md:p-8 shadow-md transition duration-200 group-hover:scale-105 lg:group-hover:scale-110">
+            <div class="group cursor-pointer">
+              <div class=" bg-white rounded-md text-center space-y-4 p-6 md:p-8 shadow-md transition duration-200 group-hover:scale-105 lg:group-hover:scale-110">
                 <img
                   src={Neurology}
                   class="w-16 m-auto bg-white"
@@ -185,8 +179,8 @@ const Services = () => {
                 </h4>
               </div>
             </div>
-            <div class="relative group cursor-pointer">
-              <div class="relative  bg-white rounded-md text-center space-y-4 p-6 md:p-8 shadow-md transition duration-200 group-hover:scale-105 lg:group-hover:scale-110">
+            <div class="group cursor-pointer">
+              <div class=" bg-white rounded-md text-center space-y-4 p-6 md:p-8 shadow-md transition duration-200 group-hover:scale-105 lg:group-hover:scale-110">
                 <img
                   src={Psychiatry}
                   class="w-16 m-auto bg-white"
@@ -199,8 +193,8 @@ const Services = () => {
                 </h4>
               </div>
             </div>
-            <div class="relative group cursor-pointer">
-              <div class="relative  bg-white rounded-md text-center space-y-4 p-6 md:p-8 shadow-md transition duration-200 group-hover:scale-105 lg:group-hover:scale-110">
+            <div class="group cursor-pointer">
+              <div class=" bg-white rounded-md text-center space-y-4 p-6 md:p-8 shadow-md transition duration-200 group-hover:scale-105 lg:group-hover:scale-110">
                 <img
                   src={Skin}
                   class="w-16 m-auto bg-white"
@@ -213,8 +207,8 @@ const Services = () => {
                 </h4>
               </div>
             </div>
-            <div class="relative group cursor-pointer">
-              <div class="relative  bg-white rounded-md text-center space-y-4 p-6 md:p-8 shadow-md transition duration-200 group-hover:scale-105 lg:group-hover:scale-110">
+            <div class="group cursor-pointer">
+              <div class=" bg-white rounded-md text-center space-y-4 p-6 md:p-8 shadow-md transition duration-200 group-hover:scale-105 lg:group-hover:scale-110">
                 <img
                   src={Obstetrics}
                   class="w-16 m-auto bg-white"
