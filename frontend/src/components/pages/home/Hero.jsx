@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import Doc from "../../../assets/doc.jpg";
 import { useState, useEffect } from "react";
+import { weekDays, indexToTimeSlot } from "../../../timeDictionaries";
 
 const Hero = () => {
   // const navigate = useNavigate();
@@ -10,15 +11,7 @@ const Hero = () => {
   // };
   const [makeAppointment, setMakeAppointment] = useState(false);
   const [pickDate, setPickDate] = useState(false);
-  const weekDays = [
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-    "Sunday",
-  ];
+
   const [currentWeekDay, setCurrentWeekDay] = useState(0);
   return (
     <>
@@ -187,8 +180,75 @@ const Hero = () => {
                 )}
               </div>
             </div>
-            {/* ID */}
-            <div className="bg-white mx-3 flex flex-wrap my-2">
+            <table class="w-full my-2 shadow-lg bg-white">
+              <tr>
+                <td class="border px-8 py-4">
+                  <button className="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+                    8:00
+                  </button>
+                </td>
+                <td class="border px-8 py-4">
+                  <button className="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+                    8:30
+                  </button>
+                </td>
+                <td class="border px-8 py-4">
+                  <button className="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+                    9:00
+                  </button>
+                </td>
+                <td class="border px-8 py-4">
+                  <button className="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+                    9:30
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td class="border px-8 py-4">
+                  <button className="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+                    10:00
+                  </button>
+                </td>
+                <td class="border px-8 py-4">
+                  <button className="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+                    10:30
+                  </button>
+                </td>
+                <td class="border px-8 py-4">
+                  <button className="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+                    11:00
+                  </button>
+                </td>
+                <td class="border px-8 py-4">
+                  <button className="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+                    11:30
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td class="border px-8 py-4">
+                  <button className="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+                    12:00
+                  </button>
+                </td>
+                <td class="border px-8 py-4">
+                  <button className="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+                    12:30
+                  </button>
+                </td>
+                <td class="border px-8 py-4">
+                  <button className="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+                    13:00
+                  </button>
+                </td>
+                <td class="border px-8 py-4">
+                  <button className="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+                    13:30
+                  </button>
+                </td>
+              </tr>
+            </table>
+            <div className="bg-white mx-3 flex flex-wrap my-4">
               <div className="bg-white w-1/2 px-3">
                 <button
                   onClick={() => (setPickDate(false), setMakeAppointment(true))}
