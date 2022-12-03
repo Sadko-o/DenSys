@@ -37,6 +37,7 @@ const Services = () => {
                   Cardiology
                 </h4>
               </div>
+
             </div>
             <div class="group cursor-pointer">
               <div class="bg-white rounded-md text-center space-y-4 p-6 md:p-8 shadow-md transition duration-200 group-hover:scale-105 lg:group-hover:scale-110">
