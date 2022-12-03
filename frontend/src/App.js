@@ -14,7 +14,7 @@ import SearchPage from "./components/pages/common/SearchPage";
 const App = () => {
   return (
     <Routes>
-      <Route exact path="/" element={<Home/>} />
+      <Route exact path="/" element={<Home />} />
       <Route path="/signin" element={<SignIn />} />
       <Route path="/adminpage" element={<AdminPage />} />
       <Route path="/doctorpage" element={<DoctorPage />} />

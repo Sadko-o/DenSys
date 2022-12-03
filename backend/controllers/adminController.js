@@ -50,10 +50,10 @@ exports.signupPatient = (req, res) => {
 }
 // createDoctor
 exports.signupDoctor = (req, res) => {
-    var {email,password,dateOfBirth, id, iin, name, surname, contact, departmentId, specId, experience, photo, category, price, schedule, address, degree, rating, password}=req.body
+    var {email,password,dateOfBirth, id, iin, name, surname, contact, departmentId, specId, experience, photo, category, price, schedule, address, degree, rating, password, procedure}=req.body
     console.log(req.body)
     if(!email || !password || !dateOfBirth || !id || !iin || !name || !surname || !contact || !departmentId 
-        || !specId || !experience || !photo || !category || !price || !schedule || !address || !degree || !rating || !password /*|| !appointments*/){
+        || !specId || !experience || !photo || !category || !price || !schedule || !address || !degree || !rating || !password || !procedure/*|| !appointments*/){
             return res.status(422).json({error:"please add all the fields"})
     }
     bcrypt.hash(password,12)
@@ -81,7 +81,9 @@ exports.signupDoctor = (req, res) => {
                     address,
                     degree,
                     rating,
-                    password: hashedpassword
+                    password: hashedpassword,
+                    procedure: req.body.procedure,
+                    appointments: req.body.appointments
                 })
                 user.save()
                 .then(user=>{
@@ -153,11 +155,11 @@ exports.updatePatient = (req, res) => {
             blood: req.body.blood ,
             emergencyContact: req.body.emergencyContact ,
             contact: req.body.contact ,
-            email: req.body.email ,
             address: req.body.address ,
-            martialStatus: req.body.martialStatus ,
+            email: req.body.email ,
             registrationDate: req.body.registrationDate,
             password: req.body.password,
+            martialStatus: req.body.martialStatus ,
             // appointments: req.body.appointments
         });
     Patient.updateOne(savedUser, patient)  
@@ -204,7 +206,8 @@ exports.updateDoctor = (req, res) => {
             rating: req.body.rating ,
             homepage: req.body.homepage,
             password: req.body.password,
-        // appointments: req.body.appointments
+            procedure: req.body.procedure,
+            appointments: req.body.appointments
         });
     Doctor.updateOne(savedUser, doctor)  
     .then(() => {
@@ -276,6 +279,7 @@ exports.deleteDoctor = (req, res) => {
     var {email} = req.body
     Doctor.findOne({email:email})
     .then(savedUser=>{
+        console.log(savedUser)
         Doctor.deleteOne(savedUser)
         .then(() => {
                 res.status(200).json({
@@ -323,3 +327,14 @@ exports.deleteAdmin = (req, res) => {
 // "email": "req.body.email",
 // "address": "req.body.address",
 // "martialStatus": "req.body.martialStatus",
+
+
+// "appointments": {
+//     "0":[0,0,0,0,0,0,0,0,0,0],
+//     "1":[0,0,0,0,0,0,0,0,0,0],
+//     "2":[0,0,0,0,0,0,0,0,0,0],
+//     "3":[0,0,0,0,0,0,0,0,0,0],
+//     "4":[0,0,0,0,0,0,0,0,0,0],
+//     "5":[0,0,0,0,0,0,0,0,0,0],
+//     "6":[0,0,0,0,0,0,0,0,0,0]
+// }

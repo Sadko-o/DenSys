@@ -16,7 +16,8 @@ const patientSchema = new mongoose.Schema({
     martialStatus: {type: String, required :true }, 
     registrationDate: {type: String, required :true },
     password: {type: String, required :true },
-    appointments:[{type: mongoose.Schema.Types.ObjectId, ref: 'Appointment'}]
+    appointments:[{type: mongoose.Schema.Types.ObjectId, ref: 'Appointment'}],
+    procedures: [{type: Array, ref: 'Procedures'}]
 });
-
+        
 module.exports = mongoose.model("Patient", patientSchema);
