@@ -116,17 +116,32 @@ exports.createAppointment = (req, res) => {
         });
         appointment.save()
         .then(user=>{
-            Doctor.findOne({email:doctorEmail})
+            var proc = 'place_holder'
+            Doctor.findOne({email:doctorEmail}) 
             .then(savedUser=>{
+                proc = savedUser.procedure
                 const newUser = new Doctor(savedUser)
                 newUser.appointments[day][time] = 1
-                console.log(newUser)
                 Doctor.updateOne(savedUser, newUser)
                 .then(() => {
                     console.log('Doctor updated successfully!')
                 }).catch(
                 (error) => {
                    console.error(error)
+                })
+            })
+
+            Patient.findOne({email:patientEmail})
+            .then(savedUser=>{
+                const newUser = new Patient(savedUser)
+                newUser.procedures.push(proc)
+                console.log(newUser)
+                Patient.updateOne(savedUser, newUser)
+                .then(() => {
+                    console.log('procedure added to Patient successfully!')
+                }).catch(
+                (error) => {
+                     console.error(error)
                 })
             })
             res.json({message:"Appointment created successfully"})
