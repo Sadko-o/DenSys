@@ -9,15 +9,14 @@ router.post('/doctor', adminController.signupDoctor)
 router.post('/patient', adminController.signupPatient)
 router.post('/appointment', appointmentController.createAppointment)
 
-router.put('/updatePatient', adminController.updatePatient)
+router.put('/patient', adminController.updatePatient)
 router.put('/doctor', adminController.updateDoctor)
 router.put('/admin', adminController.updateAdmin)
 router.put('/appointment', appointmentController.updateAppointment)
 
-router.get('/getAllPatients', dashboard.getAllPatients)
-router.get('/getAllDoctors', dashboard.getAllDoctors)
-router.get('/appointments', appointmentController.getAllAppointments)
-
+router.get('/patient', dashboard.getAllPatients)
+router.get('/doctor', dashboard.getAllDoctors)
+router.get('/appointment', appointmentController.getAppointment)
 
 router.delete('/patient', adminController.deletePatient)
 router.delete('/admin', adminController.deleteAdmin)
