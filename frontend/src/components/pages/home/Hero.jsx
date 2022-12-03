@@ -1,14 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import Img from "../../../assets/heroImg.svg";
 import Doc from "../../../assets/doc.jpg";
-import { useState, useEffect } from "react";
-import { weekDays, indexToTimeSlot } from "../../../timeDictionaries";
-import SearchPage from "../common/SearchPage";
 const Hero = () => {
   const navigate = useNavigate();
+  const [searchInput, setSearchInput] = useState("");
   const navigateToSearchPage = () => {
-    navigate("/search");
+    navigate("/search", { state: { name: searchInput } });
   };
 
   return (
@@ -30,7 +29,9 @@ const Hero = () => {
             </p>
             <div className="flex justify-center ">
               <button
-                onClick={() => navigateToSearchPage()}
+                onClick={() => {
+                  navigateToSearchPage();
+                }}
                 class="inline-block px-4 py-2 text-[#1B1212] font-semibold border-2 border-[#2273FF] rounded-md hover:bg-[#2273FF] hover:text-white focus:outline-none"
               >
                 Make an appointment
