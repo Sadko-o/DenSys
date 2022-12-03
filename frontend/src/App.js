@@ -8,6 +8,9 @@ import AdminPage from "./components/pages/admin/AdminPage";
 import DoctorPage from "./components/pages/doctor/DoctorPage";
 import PatientPage from "./components/pages/patient/PatientPage";
 import RegisterUserPage from "./components/pages/admin/RegisterUserPage";
+import SearchPage from "./components/pages/common/SearchPage";
+
+
 const App = () => {
   return (
     <Routes>
@@ -17,6 +20,7 @@ const App = () => {
       <Route path="/doctorpage" element={<DoctorPage />} />
       <Route path="/patientpage" element={<PatientPage />} />
       <Route path="/registeruser" element={<RegisterUserPage />} />
+      <Route path="/search" element={<SearchPage />} />
     </Routes>
   );
 };
