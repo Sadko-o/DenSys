@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-
+import Img from "../../../assets/heroImg.svg"
 const Hero = () => {
   const navigate = useNavigate();
   const navigateToSignInPage = () => {
@@ -36,7 +36,7 @@ const Hero = () => {
             <img
               className="object-cover object-center rounded"
               alt="hero"
-              src="https://dummyimage.com/720x600"
+              src={Img}
             />
           </div>
         </div>
