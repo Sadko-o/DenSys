@@ -3,14 +3,29 @@ const Doctor = require('../models/doctorModel');
 const Appointment = require('../models/appointmentModel');
 
 
-exports.getAllAppointments = (req, res) => {
-    Appointment.find()
-    .then(appointments=>{
-        res.json({appointments})
-    })
-    .catch(err=>{
-        console.log(err)
-    })
+exports.getAppointment = (req, res) => {
+    var {doctorEmail, patientEmail} = req.body
+    if (doctorEmail != '') {
+        Appointment.find({doctorEmail:doctorEmail})
+        .then(savedUser=>{
+            res.json({savedUser})
+        })
+    }
+    else if (patientEmail != '') {
+        Appointment.find({patientEmail:patientEmail})
+        .then(savedUser=>{
+            res.json({savedUser})
+        })
+    }
+    else {
+        Appointment.find()
+        .then(appointments=>{
+            res.json({appointments})
+        })
+        .catch(err=>{
+            console.log(err)
+        })
+    }
 }
 
 exports.updateAppointment = (req, res) => {
@@ -139,17 +154,6 @@ exports.createAppointment = (req, res) => {
                 .then(() => {
                     console.log('Patient updated successfully!')
                 }).catch((error) => {console.error(error)})
-                // Patient.findOne({email:patientEmail})
-                // .then(savedUser=>{
-                //     var myquery = { email: patientEmail};
-                //     arr = savedUser.procedures
-                //     arr.push(proc)
-                //     var newvalues = {$set: {procedures: proc}};
-                //     Patient.updateOne(myquery, newvalues, function(err, res) {
-                //         if (err) throw err;
-                //         console.log("1 document updated");
-                //     });
-                // })
             })
             
             
