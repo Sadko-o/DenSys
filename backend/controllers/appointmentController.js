@@ -5,25 +5,25 @@ const Appointment = require('../models/appointmentModel');
 
 exports.getAppointment = (req, res) => {
     var {doctorEmail, patientEmail} = req.body
-    if (doctorEmail != '') {
-        Appointment.find({doctorEmail:doctorEmail})
-        .then(savedUser=>{
-            res.json({savedUser})
-        })
-    }
-    else if (patientEmail != '') {
-        Appointment.find({patientEmail:patientEmail})
-        .then(savedUser=>{
-            res.json({savedUser})
-        })
-    }
-    else {
+    if (!doctorEmail && !patientEmail) {
         Appointment.find()
         .then(appointments=>{
             res.json({appointments})
         })
         .catch(err=>{
             console.log(err)
+        })
+    }
+    else if (doctorEmail) {
+        Appointment.find({doctorEmail:doctorEmail})
+        .then(savedUser=>{
+            res.json({savedUser})
+        })
+    }
+    else if (patientEmail) {
+        Appointment.find({patientEmail:patientEmail})
+        .then(savedUser=>{
+            res.json({savedUser})
         })
     }
 }

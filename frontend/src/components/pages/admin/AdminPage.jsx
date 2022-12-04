@@ -15,7 +15,10 @@ const AdminPage = () => {
   const [maxPage, setMaxPage] = useState(0);
   const [appointmentsSize, setAppointmentsSize] = useState(0);
   const getAllAppointments = async () => {
-    const response = await axios.get(appointmentsURL);
+    const params =  {doctorEmail: '', patientEmail: ''}
+    const response = await axios.get(appointmentsURL, {
+      params: params
+    });  
     setAppointments(response.data.appointments);
     const size = response.data.appointments.filter(
       (appointment) =>

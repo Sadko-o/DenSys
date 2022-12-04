@@ -3,7 +3,7 @@ const Doctor = require('../models/doctorModel');
 
 exports.getAllPatients = (req, res) => {
     var {email} = req.body
-    if (email != '') {
+    if (email) {
         Patient.find({email:email})
         .then(savedUser=>{
             res.json({savedUser})
@@ -22,7 +22,7 @@ exports.getAllPatients = (req, res) => {
 
 exports.getAllDoctors = (req, res) => {
     var {email} = req.body
-    if (email != '') {
+    if (email) {
         Doctor.find({email:email})
         .then(savedUser=>{
             res.json({savedUser})
