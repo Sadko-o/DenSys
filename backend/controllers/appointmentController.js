@@ -114,12 +114,11 @@ exports.deleteAppointment = (req, res) => {
 exports.createAppointment = (req, res) => {
     var {day, time, doctorEmail, patientEmail, approveStatus, doctorName, patientName, doctorSurname, patientSurname, patientContact} = req.body
     console.log(req.body)
-    // res.json({message:"saved successfully"})
-
     Appointment.findOne({doctorEmail:doctorEmail, day:day, time:time})
     .then(savedUser=>{
         if(savedUser){
-            return res.status(422).json({error:"Appointment already exists"})
+            throw new Error('Appointment already exists');
+            // return res.status(422).json({error:"Appointment already exists"})
         }
         const appointment = new Appointment({
             day,
