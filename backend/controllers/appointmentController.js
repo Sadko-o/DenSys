@@ -3,14 +3,29 @@ const Doctor = require('../models/doctorModel');
 const Appointment = require('../models/appointmentModel');
 
 
-exports.getAllAppointments = (req, res) => {
-    Appointment.find()
-    .then(appointments=>{
-        res.json({appointments})
-    })
-    .catch(err=>{
-        console.log(err)
-    })
+exports.getAppointment = (req, res) => {
+    var {doctorEmail, patientEmail} = req.body
+    if (doctorEmail != '') {
+        Appointment.find({doctorEmail:doctorEmail})
+        .then(savedUser=>{
+            res.json({savedUser})
+        })
+    }
+    else if (patientEmail != '') {
+        Appointment.find({patientEmail:patientEmail})
+        .then(savedUser=>{
+            res.json({savedUser})
+        })
+    }
+    else {
+        Appointment.find()
+        .then(appointments=>{
+            res.json({appointments})
+        })
+        .catch(err=>{
+            console.log(err)
+        })
+    }
 }
 
 exports.updateAppointment = (req, res) => {
@@ -97,7 +112,7 @@ exports.deleteAppointment = (req, res) => {
 }
 
 exports.createAppointment = (req, res) => {
-    var {id, day, time, doctorEmail, patientEmail, approveStatus} = req.body
+    var {day, time, doctorEmail, patientEmail, approveStatus, doctorName, patientName, doctorSurname, patientSurname, patientContact} = req.body
     console.log(req.body)
     // res.json({message:"saved successfully"})
 
@@ -107,19 +122,22 @@ exports.createAppointment = (req, res) => {
             return res.status(422).json({error:"Appointment already exists"})
         }
         const appointment = new Appointment({
-            id,
             day,
             time,
             doctorEmail,
             patientEmail,
-            approveStatus
+            approveStatus,
+            doctorName,
+            patientName,
+            patientSurname,
+            doctorSurname,
+            patientContact
         });
         appointment.save()
         .then(user=>{
-            var proc = 'place_holder'
             Doctor.findOne({email:doctorEmail}) 
             .then(savedUser=>{
-                proc = savedUser.procedure
+                var proc = savedUser.procedure
                 const newUser = new Doctor(savedUser)
                 newUser.appointments[day][time] = 1
                 Doctor.updateOne(savedUser, newUser)
@@ -129,21 +147,16 @@ exports.createAppointment = (req, res) => {
                 (error) => {
                    console.error(error)
                 })
-            })
-
-            Patient.findOne({email:patientEmail})
-            .then(savedUser=>{
-                const newUser = new Patient(savedUser)
-                newUser.procedures.push(proc)
-                console.log(newUser)
-                Patient.updateOne(savedUser, newUser)
+                Patient.updateOne(
+                    {email:patientEmail},
+                    {$push: {procedures: proc}}
+                )
                 .then(() => {
-                    console.log('procedure added to Patient successfully!')
-                }).catch(
-                (error) => {
-                     console.error(error)
-                })
+                    console.log('Patient updated successfully!')
+                }).catch((error) => {console.error(error)})
             })
+            
+            
             res.json({message:"Appointment created successfully"})
         })
         .catch(err=>{
