@@ -14,6 +14,11 @@ const SearchPage = () => {
   const [makeAppointment, setMakeAppointment] = useState(false);
   const [pickDate, setPickDate] = useState(false);
   const [currentWeekDay, setCurrentWeekDay] = useState(0);
+  const [patientName, setPatientName] = useState("");
+  const [patientEmail, setPatientEmail] = useState("");
+  const [patientPhone, setPatientPhone] = useState("");
+  const [patientSurname, setPatientSurname] = useState("");
+  const [timeSlot, setTimeSlot] = useState(0);
 
   // const [search , setSearch] = useInput({ type: "text" })
 
@@ -29,6 +34,36 @@ const SearchPage = () => {
   useEffect(() => {
     getAllDoctors();
   }, []);
+
+  const createAppointment = async () => {
+    const appointmentURL =
+      "https://backend-app-production-2791.up.railway.app/appointment";
+    const appointment = {
+      day: currentWeekDay,
+      time: indexToTimeSlot[timeSlot],
+      doctorEmail: "",
+      patientEmail: patientEmail,
+      approveStatus: "Pending",
+      doctorName: location.state.doctorName,
+      doctorSurname: location.state.doctorSurname,
+      patientName: patientName,
+      patientSurname: patientSurname,
+      patienеСontacts: patientPhone,
+    };
+    const response = await axios.post(appointmentURL, appointment);
+    console.log(response);
+    setPatientEmail("");
+    setPatientName("");
+    setPatientPhone("");
+    setPatientSurname("");
+    setMakeAppointment(false);
+    setPickDate(false);
+    setTimeSlot(0);
+  };
+
+  const handleCreate = async () => {
+    createAppointment();
+  };
 
   return (
     <>
@@ -174,7 +209,6 @@ const SearchPage = () => {
             <h3 className=" bg-inherit text-dark pb-2 text-xl font-bold sm:text-2xl">
               Make an appointment
             </h3>
-            {/* ID */}
             <div className=" bg-inherit relative ">
               <label
                 for="name"
@@ -188,10 +222,9 @@ const SearchPage = () => {
                 type="text"
                 className="my-4 rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                 placeholder="Name"
-                // onChange={(e) => setDiseaseTypeId(e.target.value)}
+                onChange={(e) => setPatientName(e.target.value)}
               />
             </div>
-            {/* DiseaseType Name */}
             <div className=" bg-inherit relative ">
               <label
                 for="surname"
@@ -205,7 +238,7 @@ const SearchPage = () => {
                 type="text"
                 className="my-4 rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                 placeholder="Surname"
-                // onChange={(e) => setDiseaseTypeDescription(e.target.value)}
+                onChange={(e) => setPatientSurname(e.target.value)}
               />
             </div>
             <div className="bg-inherit relative ">
@@ -221,7 +254,7 @@ const SearchPage = () => {
                 type="text"
                 className="my-4 rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                 placeholder="+7-XXX-XXX-XX-XX"
-                // onChange={(e) => setDiseaseTypeDescription(e.target.value)}
+                onChange={(e) => setPatientPhone(e.target.value)}
               />
             </div>
             <div className=" bg-inherit relative ">
@@ -237,7 +270,7 @@ const SearchPage = () => {
                 type="email"
                 className="my-4 rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                 placeholder="patient@example.com"
-                // onChange={(e) => setDiseaseTypeDescription(e.target.value)}
+                onChange={(e) => setPatientEmail(e.target.value)}
               />
             </div>
 
@@ -299,67 +332,103 @@ const SearchPage = () => {
             <table class="w-full my-2 shadow-lg bg-white">
               <tr>
                 <td class="border px-8 py-4">
-                  <button className="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
-                    8:00
+                  <button
+                    onclick={() => setTimeSlot(0)}
+                    className="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                  >
+                    {indexToTimeSlot(0)}
                   </button>
                 </td>
                 <td class="border px-8 py-4">
-                  <button className="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
-                    8:30
+                  <button
+                    onclick={() => setTimeSlot(1)}
+                    className="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                  >
+                    {indexToTimeSlot(1)}
                   </button>
                 </td>
                 <td class="border px-8 py-4">
-                  <button className="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
-                    9:00
+                  <button
+                    onclick={() => setTimeSlot(2)}
+                    className="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                  >
+                    {indexToTimeSlot(2)}
                   </button>
                 </td>
                 <td class="border px-8 py-4">
-                  <button className="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
-                    9:30
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td class="border px-8 py-4">
-                  <button className="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
-                    10:00
-                  </button>
-                </td>
-                <td class="border px-8 py-4">
-                  <button className="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
-                    10:30
-                  </button>
-                </td>
-                <td class="border px-8 py-4">
-                  <button className="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
-                    11:00
-                  </button>
-                </td>
-                <td class="border px-8 py-4">
-                  <button className="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
-                    11:30
+                  <button
+                    onclick={() => setTimeSlot(3)}
+                    className="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                  >
+                    {indexToTimeSlot(3)}
                   </button>
                 </td>
               </tr>
               <tr>
                 <td class="border px-8 py-4">
-                  <button className="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
-                    12:00
+                  <button
+                    onclick={() => setTimeSlot(4)}
+                    className="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                  >
+                    {indexToTimeSlot(4)}
                   </button>
                 </td>
                 <td class="border px-8 py-4">
-                  <button className="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
-                    12:30
+                  <button
+                    onclick={() => setTimeSlot(5)}
+                    className="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                  >
+                    {indexToTimeSlot(5)}
                   </button>
                 </td>
                 <td class="border px-8 py-4">
-                  <button className="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
-                    13:00
+                  <button
+                    onclick={() => setTimeSlot(6)}
+                    className="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                  >
+                    {indexToTimeSlot(6)}
                   </button>
                 </td>
                 <td class="border px-8 py-4">
-                  <button className="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
-                    13:30
+                  <button
+                    onclick={() => setTimeSlot(7)}
+                    className="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                  >
+                    {indexToTimeSlot(7)}
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td class="border px-8 py-4">
+                  <button
+                    onclick={() => setTimeSlot(8)}
+                    className="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                  >
+                    {indexToTimeSlot(8)}
+                  </button>
+                </td>
+                <td class="border px-8 py-4">
+                  <button
+                    onclick={() => setTimeSlot(9)}
+                    className="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                  >
+                    {indexToTimeSlot(9)}
+                  </button>
+                </td>
+                <td class="border px-8 py-4">
+                  <button
+                    onclick={() => setTimeSlot(10)}
+                    className="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                  >
+                    {indexToTimeSlot(10)}
+                  </button>
+                </td>
+                <td class="border px-8 py-4">
+                  <button
+                    onclick={() => setTimeSlot(11)}
+                    className="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                  >
+                    {indexToTimeSlot(11)}
                   </button>
                 </td>
               </tr>
@@ -375,7 +444,7 @@ const SearchPage = () => {
               </div>
               <div className="bg-white w-1/2 px-3">
                 <button
-                  onClick={() => setPickDate(false)}
+                  onClick={() => (setPickDate(false), handleCreate())}
                   className="bg-gray-100 text-dark block w-full rounded-lg border border-[#E9EDF9] p-3 text-center text-base font-medium transition hover:border-green-600 hover:bg-green-600 hover:text-white"
                 >
                   Make
