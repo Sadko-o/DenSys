@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import HomeHeader from "../../headers/AdminHeader";
 import SearchForm from "../home/SearchForm";
 import { useLocation } from "react-router-dom";
+import backendURL from "../../../backendURL";
 import { weekDays, indexToTimeSlot } from "../../../timeDictionaries";
 // COMPONENT
 const SearchPage = () => {
@@ -27,6 +28,13 @@ const SearchPage = () => {
   //     const input = <input value={value} onChange={e => setValue(e.target.value)} type={type} />;
   //     return [value, input];
   //   }
+
+  const changeButtonColor = (id) => {
+    const button = document.getElementById(id);
+    button.style.backgroundColor = "#f5f5f5";
+    button.style.color = "#000000";
+  };
+
   const getAllDoctors = async () => {
     const response = await axios.get(baseURL);
     setRow(response.data);
@@ -36,19 +44,19 @@ const SearchPage = () => {
   }, []);
 
   const createAppointment = async () => {
-    const appointmentURL =
-      "https://backend-app-production-2791.up.railway.app/appointment";
+    const appointmentURL = backendURL + "/appointment";
+    const timeS = indexToTimeSlot[timeSlot];
     const appointment = {
       day: currentWeekDay,
-      time: indexToTimeSlot[timeSlot],
-      doctorEmail: "",
+      time: timeS,
+      doctorEmail: "example@mail.ru",
       patientEmail: patientEmail,
       approveStatus: "Pending",
       doctorName: location.state.doctorName,
       doctorSurname: location.state.doctorSurname,
       patientName: patientName,
       patientSurname: patientSurname,
-      patienеСontacts: patientPhone,
+      patientСontacts: patientPhone,
     };
     const response = await axios.post(appointmentURL, appointment);
     console.log(response);
@@ -349,7 +357,10 @@ const SearchPage = () => {
                 </td>
                 <td class="border px-8 py-4">
                   <button
-                    onclick={() => setTimeSlot(2)}
+                    id="timeSlot2"
+                    onclick={() => (
+                      setTimeSlot(2), changeButtonColor("timeSlot2")
+                    )}
                     className="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
                   >
                     {indexToTimeSlot(2)}
