@@ -20,6 +20,7 @@ const SearchPage = () => {
   const [patientPhone, setPatientPhone] = useState("");
   const [patientSurname, setPatientSurname] = useState("");
   const [timeSlot, setTimeSlot] = useState(0);
+  const [deleteModal, setDeleteModal] = useState(false);
 
   // const [search , setSearch] = useInput({ type: "text" })
 
@@ -45,18 +46,22 @@ const SearchPage = () => {
 
   const createAppointment = async () => {
     const appointmentURL = backendURL + "/appointment";
-    const timeS = indexToTimeSlot[timeSlot];
+    const doctorURL = backendURL + "/doctors";
+    // const doctor = await axios.get(doctorURL, { email: "" });
+    // console.log(doctor);
+
+    const timeS = indexToTimeSlot(timeSlot);
     const appointment = {
       day: currentWeekDay,
       time: timeS,
-      doctorEmail: "example@mail.ru",
+      doctorEmail: "vovan.gay@gmail.com",
       patientEmail: patientEmail,
       approveStatus: "Pending",
-      doctorName: location.state.doctorName,
-      doctorSurname: location.state.doctorSurname,
+      doctorName: "example",
+      doctorSurname: "example",
       patientName: patientName,
       patientSurname: patientSurname,
-      patientСontacts: patientPhone,
+      patientContact: patientPhone,
     };
     const response = await axios.post(appointmentURL, appointment);
     console.log(response);
@@ -455,10 +460,35 @@ const SearchPage = () => {
               </div>
               <div className="bg-white w-1/2 px-3">
                 <button
-                  onClick={() => (setPickDate(false), handleCreate())}
+                  onClick={() => (
+                    setPickDate(false), handleCreate(), setDeleteModal(true)
+                  )}
                   className="bg-gray-100 text-dark block w-full rounded-lg border border-[#E9EDF9] p-3 text-center text-base font-medium transition hover:border-green-600 hover:bg-green-600 hover:text-white"
                 >
                   Make
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : null}
+      {deleteModal ? (
+        <div
+          x-show="modalOpen"
+          x-transition
+          className="fixed top-0 left-0  backdrop-blur-sm  flex h-full min-h-screen w-full items-center justify-center bg-[#e5e7eb] bg-opacity-90 px-4 py-5"
+        >
+          <div className="bg-white w-full max-w-[570px] rounded-[20px] bg-white py-12 px-8 text-center md:py-[60px] md:px-[70px]">
+            <p className="bg-white text-gray-800 text-xl font-bold mt-4">
+              Appointment made successfully!
+            </p>
+            <div className=" bg-white items-center  justify-center flex  my-4">
+              <div className="bg-white w-1/2 px-3 items-center">
+                <button
+                  onClick={() => setDeleteModal(false)}
+                  className="text-dark block w-full shadow-2xl rounded-lg border border-[#E9EDF9] p-3 text-center text-base font-medium transition hover:border-red-600 hover:bg-red-600 hover:text-white"
+                >
+                  Close
                 </button>
               </div>
             </div>
