@@ -1,13 +1,13 @@
-const express=require('express');
-const router=express.Router();
-const adminController = require("../controllers/adminController")
-const appointmentController = require("../controllers/appointmentController")
-const dashboard = require("../controllers/dashboard")
+const express = require("express");
+const router = express.Router();
+const adminController = require("../controllers/adminController");
+const appointmentController = require("../controllers/appointmentController");
+const dashboard = require("../controllers/dashboard");
 
-router.post('/admin', adminController.signupAdmin)
-router.post('/doctor', adminController.signupDoctor)
-router.post('/patient', adminController.signupPatient)
-router.post('/appointment', appointmentController.createAppointment)
+router.post("/admin", adminController.signupAdmin);
+router.post("/doctor", adminController.signupDoctor);
+router.post("/patient", adminController.signupPatient);
+router.post("/appointment", appointmentController.createAppointment);
 
 router.put('/patient', adminController.updatePatient)
 router.put('/doctor', adminController.updateDoctor)

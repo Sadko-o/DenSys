@@ -2,7 +2,8 @@ const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
 require("dotenv").config()
-
+var cors = require('cors')
+app.use(cors())
 // CONNECTING DATABASE
 const db = process.env.DATABASE
 mongoose.connect( db ).then(() => console.log("Mongoose is ON")).catch((error) => console.log(error))
@@ -16,6 +17,8 @@ require("./models/doctorModel")
 const auth = require('./routes/login')
 const admin = require('./routes/admin')
 app.use(express.json())
+
+
 
 // MIDDLEWARE
 app.use(auth)
