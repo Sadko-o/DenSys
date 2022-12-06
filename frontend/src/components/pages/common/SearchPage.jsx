@@ -10,9 +10,9 @@ import { weekDays, indexToTimeSlot } from "../../../timeDictionaries";
 import TimeSlot from "./TimeSlot";
 // COMPONENT
 const SearchPage = () => {
-  const baseURL = "https://backend-app-production-2791.up.railway.app/doctor";
+  // const baseURL = "https://backend-app-production-2791.up.railway.app/doctor";
   const location = useLocation();
-  const [row, setRow] = useState(null);
+  const [rows, setRows] = useState([]);
   const [search, setSearch] = useState();
   const [makeAppointment, setMakeAppointment] = useState(false);
   const [pickDate, setPickDate] = useState(false);
@@ -22,7 +22,15 @@ const SearchPage = () => {
   const [patientPhone, setPatientPhone] = useState("");
   const [patientSurname, setPatientSurname] = useState("");
   const [timeSlot, setTimeSlot] = useState(0);
-  const [deleteModal, setDeleteModal] = useState(false);
+  const [successModal, setSuccessModal] = useState(false);
+  const [failModal, setFailModal] = useState(false);
+  const [timeSlotIdx, setTimeSlotIdx] = useState([]);
+  const [doctor, setDoctor] = useState({
+    doctorID: -1,
+    doctorEmail: "",
+    doctorName: "",
+    doctorSurname: "",
+  });
 
   // const [search , setSearch] = useInput({ type: "text" })
 
@@ -32,58 +40,89 @@ const SearchPage = () => {
   //     return [value, input];
   //   }
 
-  const changeButtonColor = (id) => {
-    const button = document.getElementById(id);
-    button.style.backgroundColor = "#f5f5f5";
-    button.style.color = "#000000";
-  };
+  // const changeButtonColor = (id) => {
+  //   const button = document.getElementById(id);
+  //   button.classList.add("active:bg-green-500");
+  // };
 
-  const getAllDoctors = async () => {
-    const response = await axios.get(baseURL);
-    setRow(response.data);
-  };
+  // const getAllDoctors = async () => {
+  //   const response = await axios.get(baseURL);
+  //   setRow(response.data);
+  // };
+
   useEffect(() => {
-    getAllDoctors();
+    getDoctors();
+    // getAllDoctors();
+    console.log(rows);
   }, []);
 
-  const createAppointment = async () => {
-    const appointmentURL = backendURL + "/appointment";
-    const doctorURL = backendURL + "/doctors";
-    // const doctor = await axios.get(doctorURL, { email: "" });
-    // console.log(doctor);
+  useEffect(() => {
+    console.log("row: " + rows.length);
+    if (rows.length > 0) {
+      console.log(
+        rows.data.doctors[doctor.doctorID].appointments[currentWeekDay]
+      );
+    }
+  }, [weekDays]);
 
-    const timeS = indexToTimeSlot(timeSlot);
-    const appointment = {
-      day: currentWeekDay,
-      time: timeS,
-      doctorEmail: "vovan.gay@gmail.com",
-      patientEmail: patientEmail,
-      approveStatus: "Pending",
-      doctorName: "example",
-      doctorSurname: "example",
-      patientName: patientName,
-      patientSurname: patientSurname,
-      patientContact: patientPhone,
-    };
-    const response = await axios.post(appointmentURL, appointment);
-    console.log(response);
-    setPatientEmail("");
-    setPatientName("");
-    setPatientPhone("");
-    setPatientSurname("");
-    setMakeAppointment(false);
-    setPickDate(false);
-    setTimeSlot(0);
+  const getDoctors = async () => {
+    const response = await axios.get("http://localhost:8080/doctor");
+    console.log(response.data.doctors);
+    setRows(response.data.doctors);
   };
+
+  const createAppointment = (doctor) => {
+    const appointmentURL = backendURL + "/appointment";
+    const timeS = indexToTimeSlot(timeSlot);
+    axios({
+      method: "post",
+      url: appointmentURL,
+      data: {
+        day: currentWeekDay,
+        time: timeS,
+        doctorEmail: doctor.doctorEmail,
+        patientEmail: patientEmail,
+        approveStatus: "Pending",
+        doctorName: doctor.doctorName,
+        doctorSurname: doctor.doctorSurname,
+        patientName: patientName,
+        patientSurname: patientSurname,
+        patientContact: patientPhone,
+      },
+    })
+      .then((response) => {
+        console.log(response);
+        setPatientEmail("");
+        setPatientName("");
+        setPatientPhone("");
+        setPatientSurname("");
+        setMakeAppointment(false);
+        setPickDate(false);
+        setTimeSlot(0);
+      })
+      .catch((error) => {
+        console.log(error);
+        setFailModal(true);
+      });
+  };
+
+  function handleMakeAppointment(row, i) {
+    setMakeAppointment(true);
+    setDoctor((prevstate) => ({
+      doctorID: i,
+      doctorEmail: row.email,
+      doctorName: row.name,
+      doctorSurname: row.surname,
+    }));
+  }
 
   const handleCreate = async () => {
-    createAppointment();
+    createAppointment(doctor);
   };
 
-  const timeSlots = [];
-  for (let i = 0; i < 12; i++) {
-    timeSlots.push(<TimeSlot index={i} />);
-  }
+  const [timeSlots, setTimeSlots] = useState([
+    ...Array(12).map((_, i) => <TimeSlot index={i} />),
+  ]);
 
   return (
     <>
@@ -162,8 +201,8 @@ const SearchPage = () => {
                     </tr>
                   </thead>
                   <tbody className="text-gray-600 bg-white  hover:text-gray-900 text-sm font-light">
-                    {row ? (
-                      row.map((row) => (
+                    {rows ? (
+                      rows.map((row, i) => (
                         <tr className="border-b border-gray-300  bg-white hover:bg-gray-900">
                           <td className="py-3 px-10 text-left bg-white  whitespace-nowrap">
                             <div className="flex bg-white  items-center">
@@ -175,21 +214,21 @@ const SearchPage = () => {
                           <td className="py-3 px-10 text-left bg-white  whitespace-nowrap">
                             <div className="flex bg-white  items-center">
                               <span className="bg-white  font-medium">
-                                {row.name}
+                                {row["name"]}
                               </span>
                             </div>
                           </td>
                           <td className="py-3 px-10 text-left bg-white  whitespace-nowrap">
                             <div className="flex bg-white  items-center">
                               <span className="bg-white  font-medium">
-                                {row.surname}
+                                {row["surname"]}
                               </span>
                             </div>
                           </td>
                           <td className="py-3 px-10 text-left bg-white  whitespace-nowrap">
                             <div className="flex bg-white  items-center">
                               <span className="bg-white  font-medium">
-                                {row.specalization}
+                                {row["specialization"]}
                               </span>
                             </div>
                           </td>
@@ -197,7 +236,7 @@ const SearchPage = () => {
                             {/* TODO svg icon or smth make apppointment */}
                             <button
                               class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded-full"
-                              onClick={() => setMakeAppointment(true)}
+                              onClick={handleMakeAppointment.bind(this, row, i)}
                             >
                               Make Appointment
                             </button>
@@ -373,9 +412,7 @@ const SearchPage = () => {
               </div>
               <div className="bg-white w-1/2 px-3">
                 <button
-                  onClick={() => (
-                    setPickDate(false), handleCreate(), setDeleteModal(true)
-                  )}
+                  onClick={() => (setPickDate(false), handleCreate())}
                   className="bg-gray-100 text-dark block w-full rounded-lg border border-[#E9EDF9] p-3 text-center text-base font-medium transition hover:border-green-600 hover:bg-green-600 hover:text-white"
                 >
                   Make
@@ -385,7 +422,7 @@ const SearchPage = () => {
           </div>
         </div>
       ) : null}
-      {deleteModal ? (
+      {successModal ? (
         <div
           x-show="modalOpen"
           x-transition
@@ -398,7 +435,30 @@ const SearchPage = () => {
             <div className=" bg-white items-center  justify-center flex  my-4">
               <div className="bg-white w-1/2 px-3 items-center">
                 <button
-                  onClick={() => setDeleteModal(false)}
+                  onClick={() => setSuccessModal(false)}
+                  className="text-dark block w-full shadow-2xl rounded-lg border border-[#E9EDF9] p-3 text-center text-base font-medium transition hover:border-red-600 hover:bg-red-600 hover:text-white"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : null}
+      {failModal ? (
+        <div
+          x-show="modalOpen"
+          x-transition
+          className="fixed top-0 left-0  backdrop-blur-sm  flex h-full min-h-screen w-full items-center justify-center bg-[#e5e7eb] bg-opacity-90 px-4 py-5"
+        >
+          <div className="bg-white w-full max-w-[570px] rounded-[20px] bg-white py-12 px-8 text-center md:py-[60px] md:px-[70px]">
+            <p className="bg-white text-gray-800 text-xl font-bold mt-4">
+              Appointment made unsuccessfully. Try again.
+            </p>
+            <div className=" bg-white items-center  justify-center flex  my-4">
+              <div className="bg-white w-1/2 px-3 items-center">
+                <button
+                  onClick={() => setFailModal(false)}
                   className="text-dark block w-full shadow-2xl rounded-lg border border-[#E9EDF9] p-3 text-center text-base font-medium transition hover:border-red-600 hover:bg-red-600 hover:text-white"
                 >
                   Close
