@@ -46,14 +46,6 @@ const SearchPage = () => {
     getDoctors();
   }, []);
 
-  // useEffect(() => {
-  //   if (rows.length > 0) {
-  //     console.log(
-  //       rows.data.doctors[doctor.doctorID].appointments[currentWeekDay]
-  //     );
-  //   }
-  // }, []);
-
   const createAppointment = (doctor) => {
     const appointmentURL = backendURL + "/appointment";
     const timeS = indexToTimeSlot(timeSlot);
