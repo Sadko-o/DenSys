@@ -6,6 +6,8 @@ import SearchForm from "../home/SearchForm";
 import { useLocation } from "react-router-dom";
 import backendURL from "../../../backendURL";
 import { weekDays, indexToTimeSlot } from "../../../timeDictionaries";
+
+import TimeSlot from "./TimeSlot";
 // COMPONENT
 const SearchPage = () => {
   const baseURL = "https://backend-app-production-2791.up.railway.app/doctor";
@@ -77,6 +79,11 @@ const SearchPage = () => {
   const handleCreate = async () => {
     createAppointment();
   };
+
+  const timeSlots = [];
+  for (let i = 0; i < 12; i++) {
+    timeSlots.push(<TimeSlot index={i} />);
+  }
 
   return (
     <>
@@ -342,113 +349,19 @@ const SearchPage = () => {
                 )}
               </div>
             </div>
-            <table class="w-full my-2 shadow-lg bg-white">
-              <tr>
-                <td class="border px-8 py-4">
-                  <button
-                    onclick={() => setTimeSlot(0)}
-                    className="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-                  >
-                    {indexToTimeSlot(0)}
-                  </button>
-                </td>
-                <td class="border px-8 py-4">
-                  <button
-                    onclick={() => setTimeSlot(1)}
-                    className="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-                  >
-                    {indexToTimeSlot(1)}
-                  </button>
-                </td>
-                <td class="border px-8 py-4">
-                  <button
-                    id="timeSlot2"
-                    onclick={() => (
-                      setTimeSlot(2), changeButtonColor("timeSlot2")
-                    )}
-                    className="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-                  >
-                    {indexToTimeSlot(2)}
-                  </button>
-                </td>
-                <td class="border px-8 py-4">
-                  <button
-                    onclick={() => setTimeSlot(3)}
-                    className="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-                  >
-                    {indexToTimeSlot(3)}
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td class="border px-8 py-4">
-                  <button
-                    onclick={() => setTimeSlot(4)}
-                    className="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-                  >
-                    {indexToTimeSlot(4)}
-                  </button>
-                </td>
-                <td class="border px-8 py-4">
-                  <button
-                    onclick={() => setTimeSlot(5)}
-                    className="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-                  >
-                    {indexToTimeSlot(5)}
-                  </button>
-                </td>
-                <td class="border px-8 py-4">
-                  <button
-                    onclick={() => setTimeSlot(6)}
-                    className="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-                  >
-                    {indexToTimeSlot(6)}
-                  </button>
-                </td>
-                <td class="border px-8 py-4">
-                  <button
-                    onclick={() => setTimeSlot(7)}
-                    className="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-                  >
-                    {indexToTimeSlot(7)}
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td class="border px-8 py-4">
-                  <button
-                    onclick={() => setTimeSlot(8)}
-                    className="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-                  >
-                    {indexToTimeSlot(8)}
-                  </button>
-                </td>
-                <td class="border px-8 py-4">
-                  <button
-                    onclick={() => setTimeSlot(9)}
-                    className="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-                  >
-                    {indexToTimeSlot(9)}
-                  </button>
-                </td>
-                <td class="border px-8 py-4">
-                  <button
-                    onclick={() => setTimeSlot(10)}
-                    className="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-                  >
-                    {indexToTimeSlot(10)}
-                  </button>
-                </td>
-                <td class="border px-8 py-4">
-                  <button
-                    onclick={() => setTimeSlot(11)}
-                    className="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-                  >
-                    {indexToTimeSlot(11)}
-                  </button>
-                </td>
-              </tr>
-            </table>
+            <div className="grid grid-cols-4 gap-4">
+              {timeSlots.map((item, index) => (
+                <button
+                  onClick={() => {
+                    console.log(index);
+                    setTimeSlot(index);
+                  }}
+                >
+                  {item}
+                </button>
+              ))}
+            </div>
+
             <div className="bg-white mx-3 flex flex-wrap my-4">
               <div className="bg-white w-1/2 px-3">
                 <button
