@@ -83,7 +83,15 @@ exports.signupDoctor = (req, res) => {
                     rating,
                     password: hashedpassword,
                     procedure: req.body.procedure,
-                    appointments: req.body.appointments
+                    appointments: [
+                        [0,0,0,0,0,0,0,0,0,0,0,0],
+                        [0,0,0,0,0,0,0,0,0,0,0,0],
+                        [0,0,0,0,0,0,0,0,0,0,0,0],
+                        [0,0,0,0,0,0,0,0,0,0,0,0],
+                        [0,0,0,0,0,0,0,0,0,0,0,0],
+                        [0,0,0,0,0,0,0,0,0,0,0,0],
+                        [0,0,0,0,0,0,0,0,0,0,0,0]
+                    ]
                 })
                 user.save()
                 .then(user=>{
