@@ -1,9 +1,9 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import Img from "../../../assets/heroImg.svg"
-import Doc from "../../../assets/doc.jpg";
-import { useState, useEffect } from "react";
-import { weekDays, indexToTimeSlot } from "../../../timeDictionaries";
+// import Doc from "../../../assets/doc.jpg";
+import { useState } from "react";
+import { weekDays } from "../../../timeDictionaries";
 const Hero = () => {
   // const navigate = useNavigate();
   // const navigateToSignInPage = () => {

@@ -7,14 +7,7 @@ const SearchForm = () => {
 
     const toSearchPage=()=>{
         history('/search',{state:{name: searchInput}});
-          }
-
-    // const handleSearch = (e) => {
-    //     e.preventDefault()
-        
-    //     history(`/search`, {state: {searchInput}})
-    // }   
-
+    }
 
   return (
     
