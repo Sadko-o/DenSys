@@ -5,7 +5,7 @@ import backendURL from "../../../backendURL";
 import AppointmentLine from "./AppointmentLine";
 const appointmentsURL = backendURL + "/appointment";
 
-const pageSize = 4;
+const pageSize = 6;
 
 export default function Appointments() {
   const appointmentStatus = ["Pending", "Confirmed", "Rejected"];
@@ -19,13 +19,6 @@ export default function Appointments() {
       params: params,
     });
     setAppointments(response.data.appointments);
-    const size = response.data.appointments.filter(
-      (appointment) =>
-        appointment.approveStatus ===
-        appointmentStatus[currentAppointmentStatus]
-    ).length;
-    setAppointmentsSize(size);
-    setMaxPage(Math.ceil(size / pageSize) - 1);
   };
   useEffect(() => {
     getAllAppointments();
@@ -49,10 +42,18 @@ export default function Appointments() {
         .slice(page * pageSize, (page + 1) * pageSize)
     : null;
 
+  function setSize(index) {
+    const size = appointments.filter(
+      (appointment) => appointment.approveStatus === appointmentStatus[index]
+    ).length;
+    setAppointmentsSize(size);
+    setMaxPage(Math.ceil(size / pageSize) - 1);
+  }
   const handleStatusFilterChange = (index) => {
     setCurrentAppointmentStatus(index);
     setPage(0);
     getAllAppointments();
+    setSize(index);
   };
   const handleApprove = async (appointmentId, status) => {
     const currentAppointment = appointments.find(
@@ -64,7 +65,7 @@ export default function Appointments() {
   };
 
   return (
-    <div className="flex flex-col mx-4 my-4 w-2/3 h-1/2 bg-white rounded-lg shadow-lg">
+    <div className="flex flex-col w-full h-full bg-white rounded-lg shadow-lg">
       <div className="flex flex-row justify-between w-full h-1/6 my-2 bg-gray-200 rounded-t-lg">
         <div className="flex flex-row justify-center items-center w-full h-full">
           <h1 className="text-xl font-semibold my-2">Appointment Requests</h1>
