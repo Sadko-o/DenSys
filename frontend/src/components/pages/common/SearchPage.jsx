@@ -107,9 +107,9 @@ const SearchPage = () => {
 
   const [timeSlots, setTimeSlots] = useState([]);
 
-  useEffect(() => {
-    checkTimeSlots(currentWeekDay);
-  }, [currentWeekDay]);
+  // useEffect(() => {
+  //   checkTimeSlots(currentWeekDay);
+  // }, [currentWeekDay]);
 
   const checkTimeSlots = (index) => {
     for (let i = 0; i < 10; i++) {
@@ -117,22 +117,9 @@ const SearchPage = () => {
         timeSlots.push(<TimeSlot index={i} />);
       }
     }
+    console.log(timeSlots);
+    console.log(doctorA.appointments[index]);
   };
-
-  // const [timeSlots, setTimeSlots] = useState([
-  //   <TimeSlot index={0} />,
-  //   <TimeSlot index={1} />,
-  //   <TimeSlot index={2} />,
-  //   <TimeSlot index={3} />,
-  //   <TimeSlot index={4} />,
-  //   <TimeSlot index={5} />,
-  //   <TimeSlot index={6} />,
-  //   <TimeSlot index={7} />,
-  //   <TimeSlot index={8} />,
-  //   <TimeSlot index={9} />,
-  //   <TimeSlot index={10} />,
-  //   <TimeSlot index={11} />,
-  // ]);
 
   return (
     <>
@@ -389,7 +376,7 @@ const SearchPage = () => {
                       onClick={() => {
                         setTimeSlots([]);
                         setCurrentWeekDay(index);
-                        // checkTimeSlots(index);
+                        checkTimeSlots(index);
                       }}
                       className="hover:border-b-4 border-indigo-300 hover:text-indigo-500 hover:cursor-pointer focus:text-indigo-500 focus:border-b-4"
                     >
@@ -400,17 +387,24 @@ const SearchPage = () => {
               </div>
             </div>
             <div className="bg-white my-4 grid grid-cols-4 gap-4">
-              {timeSlots.map((item, i) => (
-                <button
-                  onClick={() => {
-                    console.log(i);
-                    setTimeSlot(i);
-                  }}
-                  className="bg-white text-dark block w-full rounded-lg border border-[#E9EDF9] p-3 text-center text-base font-medium transition hover:bg-indigo-600 bg-gray-100"
-                >
-                  {item}
-                </button>
-              ))}
+              {timeSlots ? (
+                timeSlots.map((item, i) => (
+                  <button
+                    onClick={() => {
+                      console.log(i);
+                      setTimeSlot(i);
+                    }}
+                    className="bg-white text-dark block w-full rounded-lg border border-[#E9EDF9] p-3 text-center text-base font-medium transition hover:bg-indigo-600 bg-gray-100"
+                  >
+                    {item}
+                  </button>
+                ))
+              ) : (
+                <div className="bg-white text-dark block w-full rounded-lg border border-[#E9EDF9] p-3 text-center text-base font-medium transition hover:bg-indigo-600 bg-gray-100">
+                  {" "}
+                  Supposed to work
+                </div>
+              )}
             </div>
 
             <div className="bg-white mx-3 flex flex-wrap my-4">
