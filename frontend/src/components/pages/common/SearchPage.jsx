@@ -10,21 +10,26 @@ import { weekDays, indexToTimeSlot } from "../../../timeDictionaries";
 import TimeSlot from "./TimeSlot";
 // COMPONENT
 const SearchPage = () => {
-  // const baseURL = "https://backend-app-production-2791.up.railway.app/doctor";
   const location = useLocation();
   const [rows, setRows] = useState([]);
   const [search, setSearch] = useState();
+  // pop Up windows for appointments
   const [makeAppointment, setMakeAppointment] = useState(false);
   const [pickDate, setPickDate] = useState(false);
-  const [currentWeekDay, setCurrentWeekDay] = useState(0);
+  const [successModal, setSuccessModal] = useState(false);
+  const [failModal, setFailModal] = useState(false);
+
   const [patientName, setPatientName] = useState("");
   const [patientEmail, setPatientEmail] = useState("");
   const [patientPhone, setPatientPhone] = useState("");
   const [patientSurname, setPatientSurname] = useState("");
+
+  const [doctorA, setDoctorA] = useState({});
+
+  // variables for time slots
   const [timeSlot, setTimeSlot] = useState(0);
-  const [successModal, setSuccessModal] = useState(false);
-  const [failModal, setFailModal] = useState(false);
-  const [timeSlotIdx, setTimeSlotIdx] = useState([]);
+  const [currentWeekDay, setCurrentWeekDay] = useState(0);
+
   const [doctor, setDoctor] = useState({
     doctorID: -1,
     doctorEmail: "",
@@ -32,44 +37,22 @@ const SearchPage = () => {
     doctorSurname: "",
   });
 
-  // const [search , setSearch] = useInput({ type: "text" })
-
-  // function useInput({ type /*...*/ }) {
-  //     const [value, setValue] = useState("");
-  //     const input = <input value={value} onChange={e => setValue(e.target.value)} type={type} />;
-  //     return [value, input];
-  //   }
-
-  // const changeButtonColor = (id) => {
-  //   const button = document.getElementById(id);
-  //   button.classList.add("active:bg-green-500");
-  // };
-
-  // const getAllDoctors = async () => {
-  //   const response = await axios.get(baseURL);
-  //   setRow(response.data);
-  // };
+  const getDoctors = async () => {
+    const response = await axios.get("http://localhost:8080/doctor");
+    setRows(response.data.doctors);
+  };
 
   useEffect(() => {
     getDoctors();
-    // getAllDoctors();
-    console.log(rows);
   }, []);
 
-  useEffect(() => {
-    console.log("row: " + rows.length);
-    if (rows.length > 0) {
-      console.log(
-        rows.data.doctors[doctor.doctorID].appointments[currentWeekDay]
-      );
-    }
-  }, [weekDays]);
-
-  const getDoctors = async () => {
-    const response = await axios.get("http://localhost:8080/doctor");
-    console.log(response.data.doctors);
-    setRows(response.data.doctors);
-  };
+  // useEffect(() => {
+  //   if (rows.length > 0) {
+  //     console.log(
+  //       rows.data.doctors[doctor.doctorID].appointments[currentWeekDay]
+  //     );
+  //   }
+  // }, []);
 
   const createAppointment = (doctor) => {
     const appointmentURL = backendURL + "/appointment";
@@ -99,6 +82,7 @@ const SearchPage = () => {
         setMakeAppointment(false);
         setPickDate(false);
         setTimeSlot(0);
+        setSuccessModal(true);
       })
       .catch((error) => {
         console.log(error);
@@ -106,23 +90,49 @@ const SearchPage = () => {
       });
   };
 
-  function handleMakeAppointment(row, i) {
+  function handleMakeAppointment(row) {
     setMakeAppointment(true);
     setDoctor((prevstate) => ({
-      doctorID: i,
+      doctorID: row.id,
       doctorEmail: row.email,
       doctorName: row.name,
       doctorSurname: row.surname,
     }));
+    setDoctorA(row);
   }
 
   const handleCreate = async () => {
     createAppointment(doctor);
   };
 
-  const [timeSlots, setTimeSlots] = useState([
-    ...Array(12).map((_, i) => <TimeSlot index={i} />),
-  ]);
+  const [timeSlots, setTimeSlots] = useState([]);
+
+  useEffect(() => {
+    checkTimeSlots(currentWeekDay);
+  }, [currentWeekDay]);
+
+  const checkTimeSlots = (index) => {
+    for (let i = 0; i < 10; i++) {
+      if (doctorA.appointments[index][i] == 0) {
+        timeSlots.push(<TimeSlot index={i} />);
+      }
+    }
+  };
+
+  // const [timeSlots, setTimeSlots] = useState([
+  //   <TimeSlot index={0} />,
+  //   <TimeSlot index={1} />,
+  //   <TimeSlot index={2} />,
+  //   <TimeSlot index={3} />,
+  //   <TimeSlot index={4} />,
+  //   <TimeSlot index={5} />,
+  //   <TimeSlot index={6} />,
+  //   <TimeSlot index={7} />,
+  //   <TimeSlot index={8} />,
+  //   <TimeSlot index={9} />,
+  //   <TimeSlot index={10} />,
+  //   <TimeSlot index={11} />,
+  // ]);
 
   return (
     <>
@@ -228,7 +238,7 @@ const SearchPage = () => {
                           <td className="py-3 px-10 text-left bg-white  whitespace-nowrap">
                             <div className="flex bg-white  items-center">
                               <span className="bg-white  font-medium">
-                                {row["specialization"]}
+                                {row["procedure"]}
                               </span>
                             </div>
                           </td>
@@ -236,7 +246,7 @@ const SearchPage = () => {
                             {/* TODO svg icon or smth make apppointment */}
                             <button
                               class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded-full"
-                              onClick={handleMakeAppointment.bind(this, row, i)}
+                              onClick={handleMakeAppointment.bind(this, row)}
                             >
                               Make Appointment
                             </button>
@@ -357,7 +367,6 @@ const SearchPage = () => {
       {pickDate ? (
         <div
           x-show="modalOpen"
-          x-transition
           className="fixed top-0 left-0 flex h-full min-h-screen w-full items-center justify-center bg-[#e5e7eb] bg-opacity-90 px-4 py-5"
         >
           <div className="w-full max-w-[765px] rounded-[20px] bg-white py-12 px-8 text-center md:py-[60px] md:px-[70px]">
@@ -378,7 +387,9 @@ const SearchPage = () => {
                     <button
                       key={index}
                       onClick={() => {
+                        setTimeSlots([]);
                         setCurrentWeekDay(index);
+                        // checkTimeSlots(index);
                       }}
                       className="hover:border-b-4 border-indigo-300 hover:text-indigo-500 hover:cursor-pointer focus:text-indigo-500 focus:border-b-4"
                     >
@@ -388,13 +399,14 @@ const SearchPage = () => {
                 )}
               </div>
             </div>
-            <div className="grid grid-cols-4 gap-4">
-              {timeSlots.map((item, index) => (
+            <div className="bg-white my-4 grid grid-cols-4 gap-4">
+              {timeSlots.map((item, i) => (
                 <button
                   onClick={() => {
-                    console.log(index);
-                    setTimeSlot(index);
+                    console.log(i);
+                    setTimeSlot(i);
                   }}
+                  className="bg-white text-dark block w-full rounded-lg border border-[#E9EDF9] p-3 text-center text-base font-medium transition hover:bg-indigo-600 bg-gray-100"
                 >
                   {item}
                 </button>
