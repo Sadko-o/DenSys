@@ -1,3 +1,3 @@
-const backendURL = "http://localhost:8080";
+const backendURL = "https://densys-production.up.railway.app";
 
 export default backendURL;

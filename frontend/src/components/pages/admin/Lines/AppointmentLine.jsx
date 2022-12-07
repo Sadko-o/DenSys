@@ -1,13 +1,14 @@
 import React from "react";
-import { weekDays, indexToTimeSlot } from "../../../timeDictionaries";
+import { weekDays, indexToTimeSlot } from "../../../../timeDictionaries";
 
 export default function AppointmentLine(props) {
   const appointment = props.appointment;
   const handleApprove = props.handleApprove;
   const filter = props.appointmentStatus;
+  const key = props.key;
   return (
     <>
-      <tr className="border-b border-gray-200">
+      <tr className="border-b border-gray-200" key={key}>
         <td className="px-6 py-4 whitespace-nowrap">
           <div className="flex items-center">
             <div className="ml-4">

@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import backendURL from "../../../backendURL";
-import AppointmentLine from "./AppointmentLine";
+import AppointmentLine from "./Lines/AppointmentLine";
 const appointmentsURL = backendURL + "/appointment";
 
 const pageSize = 6;
@@ -71,7 +71,7 @@ export default function Appointments() {
           <h1 className="text-xl font-semibold my-2">Appointment Requests</h1>
         </div>
       </div>
-      <div className="flex space-x-6 border-b mx-6 first:text-indigo-500 ">
+      <div className="flex space-x-6 border-b mx-6 justify-center first:text-indigo-500 ">
         {appointmentStatus.map((item, index) =>
           index === currentAppointmentStatus ? (
             <button
@@ -141,8 +141,9 @@ export default function Appointments() {
                 </thead>
                 <tbody>
                   {currentPageAppointments ? (
-                    currentPageAppointments.map((appointment) => (
+                    currentPageAppointments.map((appointment, index) => (
                       <AppointmentLine
+                        key={index}
                         appointment={appointment}
                         handleApprove={handleApprove}
                         appointmentStatus={currentAppointmentStatus}
@@ -167,30 +168,32 @@ export default function Appointments() {
           </div>
         </div>
 
-        <div class="flex flex-col items-center">
-          <span class="text-sm text-gray-700">
+        <div className="flex flex-col items-center">
+          <span className="text-sm text-gray-700">
             Showing{" "}
-            <span class="font-semibold text-gray-900 ">
+            <span className="font-semibold text-gray-900 ">
               {page * pageSize + 1}
             </span>{" "}
             to{" "}
-            <span class="font-semibold text-gray-900 ">
+            <span className="font-semibold text-gray-900 ">
               {Math.min((page + 1) * pageSize, appointmentsSize)}
             </span>{" "}
             of{" "}
-            <span class="font-semibold text-gray-900 ">{appointmentsSize}</span>{" "}
+            <span className="font-semibold text-gray-900 ">
+              {appointmentsSize}
+            </span>{" "}
             Entries
           </span>
-          <div class="inline-flex mt-2 xs:mt-0">
+          <div className="inline-flex mt-2 xs:mt-0">
             <button
               onClick={handlePrevPage}
-              class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gray-800 rounded-l hover:bg-gray-900 "
+              className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gray-800 rounded-l hover:bg-gray-900 "
             >
               Prev
             </button>
             <button
               onClick={handleNextPage}
-              class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gray-800 border-0 border-l border-gray-700 rounded-r hover:bg-gray-900 "
+              className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gray-800 border-0 border-l border-gray-700 rounded-r hover:bg-gray-900 "
             >
               Next
             </button>

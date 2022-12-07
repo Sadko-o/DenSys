@@ -10,13 +10,12 @@ import PatientPage from "./components/pages/patient/PatientPage";
 import RegisterUserPage from "./components/pages/admin/RegisterUserPage";
 import SearchPage from "./components/pages/common/SearchPage";
 
-
 const App = () => {
   return (
     <Routes>
       <Route exact path="/" element={<Home />} />
       <Route path="/signin" element={<SignIn />} />
-      <Route path="/adminpage" element={<AdminPage />} />
+      <Route path="/adminpage/*" element={<AdminPage />} />
       <Route path="/doctorpage" element={<DoctorPage />} />
       <Route path="/patientpage" element={<PatientPage />} />
       <Route path="/registeruser" element={<RegisterUserPage />} />
