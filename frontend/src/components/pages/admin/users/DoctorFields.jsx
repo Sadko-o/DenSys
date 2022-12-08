@@ -91,10 +91,10 @@ const DoctorFields = [
     id: "photo",
   },
   {
-    label: "Homepage URL",
-    type: "url",
-    placeholder: "Homepage URL",
-    id: "homepage",
+    label: "procedure",
+    type: "text",
+    placeholder: "procedure",
+    id: "procedure",
   },
   {
     label: "Rating",
