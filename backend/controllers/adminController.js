@@ -53,7 +53,7 @@ exports.signupDoctor = (req, res) => {
     var {email,password,dateOfBirth, id, iin, name, surname, contact, departmentId, specId, experience, photo, category, price, schedule, address, degree, rating, password, procedure}=req.body
     console.log(req.body)
     if(!email || !password || !dateOfBirth || !id || !iin || !name || !surname || !contact || !departmentId 
-        || !specId || !experience || !photo || !category || !price || !schedule || !address || !degree || !rating || !password || !procedure/*|| !appointments*/){
+        || !specId || !experience || !photo || !category || !price || !address || !degree || !rating || !password || !procedure){
             return res.status(422).json({error:"please add all the fields"})
     }
     bcrypt.hash(password,12)
@@ -77,7 +77,7 @@ exports.signupDoctor = (req, res) => {
                     photo,
                     category,
                     price,
-                    schedule,
+                    // schedule,
                     address,
                     degree,
                     rating,
