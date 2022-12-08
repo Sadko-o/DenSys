@@ -7,13 +7,24 @@ import PatientLine from "./Lines/PatientLine";
 import DoctorTableHead from "./TableHeads/DoctorTableHead";
 import DoctorLine from "./Lines/DoctorLine";
 
-const pageSize = 6;
+const pageSize = 5;
 
 export default function Appointments() {
   const roles = ["Patients", "Doctors"];
   const [currentRole, setCurrentRole] = useState(0);
   const [doctorList, setDoctorList] = useState(null);
   const [patientList, setPatientList] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+  const handleNextPage = () => {
+    if (currentPage < Math.ceil(patientList.length / pageSize)) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
 
   const setAllUsers = async () => {
     const response = await axios.get(backendURL + "/doctor");
@@ -30,6 +41,22 @@ export default function Appointments() {
   const handleFilterChange = (index) => {
     setAllUsers();
     setCurrentRole(index);
+  };
+
+  const deleteDoctor = async (email) => {
+    const response = await axios.delete(backendURL + "/doctor", {
+      data: { email: email },
+    });
+    console.log(response);
+    setAllUsers();
+  };
+
+  const deletePatient = async (email) => {
+    const response = await axios.delete(backendURL + "/patient", {
+      data: { email: email },
+    });
+    console.log(response);
+    setAllUsers();
   };
 
   const Loading = (
@@ -85,7 +112,10 @@ export default function Appointments() {
                     <tbody>
                       {patientList
                         ? patientList.map((patient) => (
-                            <PatientLine data={patient} />
+                            <PatientLine
+                              data={patient}
+                              handleDelete={deletePatient}
+                            />
                           ))
                         : Loading}
                     </tbody>
@@ -96,7 +126,10 @@ export default function Appointments() {
                     <tbody>
                       {doctorList
                         ? doctorList.map((doctor) => (
-                            <DoctorLine data={doctor} />
+                            <DoctorLine
+                              data={doctor}
+                              handleDelete={deleteDoctor}
+                            />
                           ))
                         : Loading}
                     </tbody>
@@ -123,13 +156,13 @@ export default function Appointments() {
         <div class="flex flex-col items-center">
           <div class="inline-flex mt-2 xs:mt-0">
             <button
-              //   onClick={handlePrevPage}
+              onClick={handlePrevPage}
               class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gray-800 rounded-l hover:bg-gray-900 "
             >
               Prev
             </button>
             <button
-              //   onClick={handleNextPage}
+              onClick={handleNextPage}
               class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gray-800 border-0 border-l border-gray-700 rounded-r hover:bg-gray-900 "
             >
               Next
