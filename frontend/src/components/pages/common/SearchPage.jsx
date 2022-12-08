@@ -2,35 +2,68 @@
 import axios from 'axios'
 import React, {useState, useEffect} from 'react'
 import HomeHeader from '../../headers/AdminHeader';
-import SearchForm from '../home/SearchForm';
-import { useLocation } from 'react-router-dom';
 import Autocomplete from "./AutoComplete";
+// import { Autocomplete } from '@mantine/core';
 
 // COMPONENT
 const SearchPage = () => {
     const baseURL = "https://densys-production.up.railway.app/";
-    const location = useLocation();
-    const [row, setRow] = useState(null);
+    // const location = useLocation();
+    const [row, setRow] = useState([]);
     const [searchValue , setSearchValue] = useState();
-    const [showOptions, setShowOptions] = useState(false)
-    const [cursor, setCursor] = useState(-1)
-    const options = ['Chennai', 'Mumbai', 'Bangalore']
+    const [searchBy, setSearchBy] = useState(0)
+    const [successModal, setSuccessModal] = useState(false);
+    const [failModal, setFailModal] = useState(false);
+    const [timeSlotIdx, setTimeSlotIdx] = useState([]);
+    const [doctor, setDoctor] = useState({
+      doctorID: -1,
+      doctorEmail: "",
+      doctorName: "",
+      doctorSurname: "",
+    });
+    const [searchResults, setSearchResults] = React.useState([]);
+    const handleSearch = event => {
+       setSearchValue(event.target.value);
+     };
+    // const options = doctorName;
+    var options = Object.values(row).map((item)=> [item.name]).flat();
+    var procedure = Object.values(row).map((item)=> [item.procedure]).flat();
+
+    const handleChoose = (e) =>{
+      setSearchBy( e.target.value);
+    }
 
     const fetchHandler = async () => {
         const response = await axios.get(baseURL+"doctor");
-        // console.log(response.data['doctors']);
         setRow(response.data['doctors']);
     }
 
+
     useEffect(() => {
-        fetchHandler();
-        // console.log(row)
-    }, []);
+      fetchHandler();
+      console.log(options);
+    },[])
+    // useEffect(() => {
+    //     fetchHandler();
+    //     const results = options.filter(doctor => doctor.toLowerCase().includes(searchValue))
+    //     setRow(results);
+    // }, [searchValue]);
 
+    // useEffect(() => {
+    //   const results = doctorName.filter(person =>
+    //     person.toLowerCase().includes(searchValue)
+    //   );
+    //   setSearchResults(results);
+    // }, [searchValue]);
 
+    // const filtered = row.filter(row => {
+    //   return row.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1;
+    // });
 
     return (
+      
     <>
+    
         <HomeHeader/>
         <div >
             <div className="min-w-screen h-screen pt-10 shadow-2xl flex items-center justify-center bg-[#f3f3f3] font-sans overflow-hidden">
@@ -40,16 +73,14 @@ const SearchPage = () => {
                         <form >
                             <div className='flex px-20'>
                                 <div className="relative ">
-                                    <select className="bg-[#2273FF] flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-white  border  rounded-l-lg  focus:ring-4  dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600">
-                                        <option>All categories </option>
-                                        <option>Procedure | Specialization</option>
-                                        <option>Doctor Name</option>
+                                    <select opt className="bg-[#2273FF] flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-white  border  rounded-l-lg  focus:ring-4  dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600" onClick={(event) => handleChoose(event)}>
+                                        <option value={0}>All categories </option>
+                                        <option value={1}>Procedure | Specialization</option>
+                                        <option value={2}>Doctor Name</option>
                                     </select>
                                 </div>
-                                <div className="relative w-full items-center">
-                                    {/* <input type="text" id="search-dropdown" className="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 " options={['Chennai', 'Mumbai', 'Bangalore']}  placeholder={location.state.name} value={searchValue} onChange={(e)=>setSearchValue(e.target.value)}/> */}
-                                    {/* <Autocomplete suggestions={["Oranges", "Apples", "Banana", "Kiwi", "Mango"]}/> */}
-                                    <Autocomplete className="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 " suggestions={options}  value={searchValue} onChange={(e)=>setSearchValue(e.target.value)}/>
+                                <div className=" relative w-full items-center">
+                                    <Autocomplete suggestions={options}  value={searchValue} onChange={e=>handleSearch(e)}/>
                                     <button type="submit" className="absolute top-0 right-0 p-2.5 text-sm font-medium text-white bg-white rounded-r-lg border   focus:ring-4 focus:outline-none focus:ring-blue-300 " >
                                         <svg aria-hidden="true" className="w-5 h-5  bg-transparent" fill="none" stroke="#2273FF" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                                         <span className="sr-only">Search</span>

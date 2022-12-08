@@ -89,7 +89,7 @@ class Autocomplete extends Component {
                 }
                 return (
                     // className="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 " options={['Chennai', 'Mumbai', 'Bangalore']}  placeholder={location.state.name} value={searchValue} onChange={(e)=>setSearchValue(e.target.value)}
-                  <li className="" key={suggestion} onClick={onClick}>
+                  <li className="relative top-0 overflow-hidden z-30 right-0 p-2.5 text-sm font-medium text-black bg-white rounded-r-lg border  " key={suggestion} onClick={onClick}>
                     {suggestion}
                   </li>
                 );
