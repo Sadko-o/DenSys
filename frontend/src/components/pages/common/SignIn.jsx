@@ -12,7 +12,6 @@ const SignIn = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [userRole, setUserRole] = useState("default");
 
-  
   /*****************************  BACKEND  ***************************/
   const adminSign = "http://localhost:8080/loginAdmin";
   const patientSign = "http://localhost:8080/loginPatient";
@@ -51,7 +50,7 @@ const SignIn = () => {
       )
       .finally(() => {
         if (verified) {
-          navigate("/" + userRole + "page");
+          navigate("/" + userRole + "page", { state: { email: email } });
         } else {
           setErrorMessage("Invalid email or password");
         }
